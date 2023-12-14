@@ -9,7 +9,22 @@ let surveyValueChanged = function (survey, options) {
     }
 };
 
-Survey
-    .StylesManager
-    .applyTheme("modern");
+function saveData(url, data){
+    console.log("saving ata via:" + url + data);
+    console.log(data);
 
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {data},
+        success: function(result) {
+            if(result.hasOwnProperty('languageChanged') && result.languageChanged) {
+                window.location.reload();
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log('failed:' + thrownError.toString());
+        }
+
+    });
+}

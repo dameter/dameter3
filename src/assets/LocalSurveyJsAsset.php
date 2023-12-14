@@ -5,7 +5,6 @@ use yii\web\AssetBundle;
 
 /**
  * Class LocalSurveyJsAsset this contains the local customizations for the SurveyJs asset (which uses remote)
- * @package panel\common\assets
  */
 class LocalSurveyJsAsset extends AssetBundle
 {

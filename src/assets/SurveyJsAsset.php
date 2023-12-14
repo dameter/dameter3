@@ -16,6 +16,7 @@ class SurveyJsAsset extends AssetBundle
 
     public $js = [
         'survey.jquery.js',
+        'themes/layered-light.js'
     ];
 
     public $depends = [

@@ -2,6 +2,7 @@
 
 $params = require_once(__DIR__ . '/params.php');
 $aliases = require __DIR__ . '/aliases.php';
+$log = require __DIR__ . '/log.php';
 
 $config = [
     'id' => 'dameter-app',
@@ -15,6 +16,7 @@ $config = [
     'bootstrap' => ['log'],
 
     'components' => [
+        'log' => $log,
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
@@ -26,6 +28,12 @@ $config = [
         'request' =>[
             'cookieValidationKey' => 'test'
         ],
+        'cache' => [
+            'class' => 'yii\caching\FileCache',
+            'fileMode' => 0777,
+            'dirMode' => 0777,
+        ],
+
     ],
     'params' => $params
 
