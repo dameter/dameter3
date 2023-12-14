@@ -10,9 +10,6 @@ let surveyValueChanged = function (survey, options) {
 };
 
 function saveData(url, data){
-    console.log("saving ata via:" + url + data);
-    console.log(data);
-
     $.ajax({
         url: url,
         type: 'POST',

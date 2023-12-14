@@ -2,6 +2,7 @@
 !.gitignore
 /config/params.php
 /config/log.php
+/config/credentials.php
 /env.php
 /runtime
 /public/assets/*

@@ -4,7 +4,6 @@
 \dameter\app\assets\LocalSurveyJsAsset::register($this);
 $surveyId = "test3";
 $fileName = Yii::getAlias("@runtime")."/surveys/$surveyId.json";
-Yii::info("init", "dameter\haha");
 $json = file_get_contents($fileName);
 $url = \yii\helpers\Url::toRoute(["//api/response/save"]);
 $responseId = rand(1000000,9999999);
@@ -15,14 +14,17 @@ $this->registerJs(<<<JS
     survey.applyTheme(SurveyTheme.LayeredLight);
     
     survey.onValueChanged
-    .add(function (result) {
+    .add(function (survey, options) {
+        let variableName = options.name;
+        let variableValue = options.value;
+        let pageData = {[variableName]: variableValue};
         var postData = {
-            pageData: result.data,
+            pageData: pageData,
             responseId: '$responseId',
         };
         
         document
-        .textContent = JSON.stringify(result.data);
+        .textContent = JSON.stringify(pageData);
         saveData('$url', postData)
     });
 

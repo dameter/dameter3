@@ -1,8 +1,8 @@
 <?php
 
 $params = require_once(__DIR__ . '/params.php');
-$aliases = require __DIR__ . '/aliases.php';
-$log = require __DIR__ . '/log.php';
+$aliases = require_once(__DIR__ . '/aliases.php');
+$components = require_once(__DIR__ . '/components.php');
 
 $config = [
     'id' => 'dameter-app',
@@ -15,26 +15,7 @@ $config = [
     'language' =>'et',
     'bootstrap' => ['log'],
 
-    'components' => [
-        'log' => $log,
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-        ],
-        'user' => [
-            'identityClass' => \dameter\app\models\User::class,
-            'enableAutoLogin' => true,
-        ],
-        'request' =>[
-            'cookieValidationKey' => 'test'
-        ],
-        'cache' => [
-            'class' => 'yii\caching\FileCache',
-            'fileMode' => 0777,
-            'dirMode' => 0777,
-        ],
-
-    ],
+    'components' => $components,
     'params' => $params
 
 ];
