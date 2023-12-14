@@ -1,0 +1,49 @@
+version: '3'
+services:
+  nginx:
+    image: evild/alpine-nginx:1.9.15-openssl
+    container_name: dameter_nginx
+    volumes:
+      - ./:/var/www/html/:ro
+      - ./docker/nginx/conf/nginx.conf:/etc/nginx/conf/nginx.conf:ro
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
+    ports:
+      - 8011:80
+    links:
+      - php
+    depends_on:
+      - db
+      - php
+  php:
+    build: docker/php
+    container_name: dameter_php
+
+    volumes:
+      - ./:/var/www/html
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+    depends_on:
+      - db
+    environment:
+      - DB_TEST_DATABASE=app_test
+      - DB_DATABASE=app
+      - DB_HOST=db
+      - DB_USERNAME=root
+      - DB_PASSWORD=password
+
+  db:
+    image: mariadb:latest
+    container_name: dameter_mariadb
+    volumes:
+      - ./.mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+volumes:
+  db-data:
+    driver: local
+
+networks:
+  default:
+    external:
+      name: dev1
+  dev1:
+    external: true
