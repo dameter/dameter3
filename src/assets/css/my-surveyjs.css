@@ -1,67 +1,8 @@
-.sv_main {
-    font-size: 1.3em;
-}
-.sv_q_title {
-    font-size: 2em !important;
-}
-.sv_q_required_text {
-    color: red;
-}
-.sv_q {
-    background-color: #fff;
-}
-
-.sv_q_description{
-    color: #7a869d;
-    font-size: 1.2em;
-}
-
-
-.sv-btn {
-
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border: none;
-    border-radius: 0.5em;
-    color: #ffffff;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 1.2em;
-    font-weight: bold;
-    outline: none;
-    padding: 0.5em 2.786em 0.6em;
-    text-align: left;
-
-}
-
-.sv-root-modern .sv-radio--checked .sv-radio__svg {
-    border-color: rgb(60, 141, 188) !important;
-    fill: rgb(60, 141, 188) !important;
-}
-
-.sv-progress__bar {
-
-    position: relative;
-    height: 24px;
-    background-color: #1ab394;
-
-}
-
-.sv-progress__text {
-    margin-left: 0.4em !important;
-}
-.sv-body__page, .sv-body__footer {
-
-    margin-right: 0.4em !important;
-    margin-left: 0.4em !important;
-
-}
-
-.sv-footer {
-    min-height: 2em;
-    padding: 0.4em 0 0.87em 0;
-}
-.sv-body__page, .sv-body__footer {
-    margin-top: 0.1em;
+/*theme customizations*/
+body {
+    --sjs-font-family: "Arial";
+    --sjs-font-size: 16px;
+    --bs-body-font-size: 1rem;
+    --sjs-special-red: #CCC;
+    --sjs-general-backcolor-dim: #FFFFFF;
 }

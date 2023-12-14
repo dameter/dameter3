@@ -6,13 +6,18 @@ use yii\web\YiiAsset;
 
 class SurveyJsAsset extends AssetBundle
 {
-    public $js = [
-        'https://unpkg.com/survey-jquery/survey.jquery.min.js'
-    ];
+    public $sourcePath = '@npm/survey-jquery';
 
     public $css = [
-        "https://unpkg.com/survey-jquery/defaultV2.min.css"
+        //'survey.css',
+        //'modern.css',
+        'defaultV2.css',
     ];
+
+    public $js = [
+        'survey.jquery.js',
+    ];
+
     public $depends = [
         \yii\web\JqueryAsset::class,
     ];

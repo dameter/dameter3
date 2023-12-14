@@ -4,4 +4,5 @@ config/params.php
 /env.php
 /runtime
 /public/assets/*
+/node_modules/
 /vendor/

@@ -1,0 +1,20 @@
+{
+  "name": "dameter-app",
+  "version": "1.0.0",
+  "description": "Dameter survey data collector",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+git@github.com:dameter/dameter3.git"
+  },
+  "author": "Tõnis Ormisson <tonis@andmemasin.eu>",
+  "dependencies": {
+    "survey-jquery": "^1.9.19"
+  }
+}
