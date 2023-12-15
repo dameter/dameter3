@@ -29,6 +29,16 @@ trait ApplicationAwareTrait
         return $this->getApp() instanceof DameterConsoleApplication;
     }
 
+    public function currentTime() : \DateTime
+    {
+        return new \DateTime();
+    }
+
+    public function currentTimeForDb(): string
+    {
+        return $this->currentTime()->format("Y-m-d H:i:s.u");
+    }
+
 
 
 }

@@ -24,7 +24,7 @@ return [
     ],
     'db' => [
         'class' => 'yii\db\Connection',
-        'dsn' => 'mysql:host=127.0.0.1;dbname=app_test;port=8888',
+        'dsn' => 'mysql:host=127.0.0.1;dbname=app;port=8888',
         'username' => 'root',
         'password' => 'password',
         'charset' => 'utf8',
