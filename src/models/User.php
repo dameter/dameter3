@@ -33,7 +33,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        return isset(self::$users[$id]) ? new User(self::$users[$id]) : null;
     }
 
     /**
@@ -43,7 +43,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     {
         foreach (self::$users as $user) {
             if ($user['accessToken'] === $token) {
-                return new static($user);
+                return new User($user);
             }
         }
 
@@ -54,13 +54,13 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      * Finds user by username
      *
      * @param string $username
-     * @return static|null
+     * @return User|null
      */
     public static function findByUsername($username)
     {
         foreach (self::$users as $user) {
             if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
+                return new User($user);
             }
         }
 

@@ -52,7 +52,6 @@ trait ApplicationTrait
             echo $message . PHP_EOL;
         }
 
-        $this->logger->log($level, $data, $context);
     }
 
 

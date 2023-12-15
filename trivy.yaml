@@ -1,0 +1,17 @@
+debug: true
+include-dev-deps: true
+exit-code: 1
+format: table
+severity:
+  - HIGH
+  - CRITICAL
+scan:
+  skip-dirs:
+    - runtime/
+    - .mysql/
+    - public/assets/
+    - tests/
+  skip-files:
+    - vendor/**/Gemfile.lock
+    - vendor/**/yarn.lock
+    - vendor/**/package-lock.json
