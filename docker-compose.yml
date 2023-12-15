@@ -32,11 +32,12 @@ services:
 
   db:
     image: mariadb:latest
-    container_name: dameter_mariadb
+    container_name: dameter_db
     volumes:
       - ./.mysql:/var/lib/mysql
+      - ./init/db/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
-      - MYSQL_ROOT_PASSWORD=password
+      - MARIADB_ROOT_PASSWORD=password
 volumes:
   db-data:
     driver: local

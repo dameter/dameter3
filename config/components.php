@@ -12,6 +12,7 @@ return [
         'showScriptName' => false,
     ],
     'user' => [
+        'class' => \dameter\app\models\User::class,
         'identityClass' => \dameter\app\models\User::class,
         'enableAutoLogin' => true,
     ],
@@ -28,9 +29,6 @@ return [
     ],
 
 
-    'errorHandler' => [
-        'errorAction' => 'site/error',
-    ],
     'mailer' => $credentials['mailer'],
     'db' => $credentials['db'],
 
