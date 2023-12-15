@@ -10,9 +10,11 @@ return [
     'urlManager' => [
         'enablePrettyUrl' => true,
         'showScriptName' => false,
+        'rules' => [
+            '/s/<key:[\w-]+>' => 'survey/index',
+        ],
     ],
     'user' => [
-        'class' => \dameter\app\models\User::class,
         'identityClass' => \dameter\app\models\User::class,
         'enableAutoLogin' => true,
     ],

@@ -25,10 +25,10 @@ class m231215_093435_init extends Migration
             'time_completed' => $this->dateTime(6)->null(),
         ]);
 
-        $this->createIndex('ix_survey_status', 'survey', 'status_id', true);
+        $this->createIndex('ix_survey_status', 'survey', 'status_id');
         $this->createIndex('ix_survey_key', 'survey', 'key', true);
         $this->createIndex('ix_survey_name', 'survey', 'name', true);
-        $this->createIndex('ix_survey_external', 'survey', 'external_id', true);
+        $this->createIndex('ix_survey_external', 'survey', 'external_id');
         $this->createIndex('ix_survey_uuid', 'survey', 'uuid', true);
         $this->createIndex('ix_survey_time_completed', 'survey', 'time_completed');
         $this->createIndex('ix_survey_time_created', 'survey', 'time_created');

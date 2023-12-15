@@ -9,7 +9,8 @@
         "ext-json": "*",
         "yiisoft/yii2": "~2.0.45",
         "yiisoft/yii2-bootstrap5": "~2.0.2",
-        "yiisoft/yii2-symfonymailer": "~2.0.3"
+        "yiisoft/yii2-symfonymailer": "~2.0.3",
+        "ramsey/uuid": "^4.7"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
@@ -44,5 +45,39 @@
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
-    ]
+    ],
+    "scripts": {
+        "post-install-cmd": [
+            "yii\\composer\\Installer::postInstall",
+            "if [ ! -d public/assets ]; then mkdir -m 777 public/assets; fi",
+            "if [ ! -f env.php ]; then cp env-example.php env.php; fi",
+            "if [ ! -f config/log.php ]; then cp config/log-example.php config/log.php; fi",
+            "if [ ! -f config/params.php ]; then cp config/params-example.php config/params.php; fi",
+            "if [ ! -f config/credentials.php ]; then cp config/credentials-example.php config/credentials.php; fi",
+            "php yii migrate/up  --interactive=0",
+            "php yii user-strings",
+            "php yii init-roles"
+        ],
+        "post-update-cmd": [
+            "php yii migrate/up  --interactive=0",
+            "php yii user-strings",
+            "php yii init-roles",
+            "rm -rf runtime/*.*"
+        ],
+        "post-create-project-cmd": [
+            "yii\\composer\\Installer::postCreateProject",
+            "yii\\composer\\Installer::postInstall",
+            "if [ ! -f env.php ]; then cp env-example.php env.php; fi",
+            "if [ ! -f src/config/db.php ]; then cp src/config/db.example.php src/config/db.php; fi",
+            "if [ ! -f src/config/credentials.php ]; then cp src/config/credentials.example.php src/config/credentials.php; fi",
+            "if [ ! -f src/config/params.php ]; then cp src/config/params.example.php src/config/params.php; fi",
+            "if [ ! -f src/pm2/ecosystem.config.cjs ]; then cp src/pm2/ecosystem.config-example.cjs src/pm2/ecosystem.config.cjs; fi",
+
+            "php yii migrate/up  --interactive=0",
+            "php yii user-strings",
+            "php yii init-roles",
+            "php yii user/create tonis@andmemasin.eu admin password root",
+            "php yii user/confirm admin"
+        ]
+    }
 }

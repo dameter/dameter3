@@ -2,6 +2,8 @@
 
 namespace dameter\app\models;
 
+use dameter\app\traits\KeyedRecordTrait;
+
 /**
  * @property string $key
  * @property string $uuid
@@ -11,6 +13,8 @@ namespace dameter\app\models;
  */
 class Survey extends TimedActiveRecord
 {
+    use KeyedRecordTrait;
+
     public function rules()
     {
         return array_merge(parent::rules(),[

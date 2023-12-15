@@ -2,13 +2,16 @@
 
 namespace dameter\app\controllers;
 
-use yii\web\Controller;
-use Yii;
+use dameter\app\models\Survey;
 
-class SurveyController extends Controller
+class SurveyController extends BaseController
 {
     public function actionIndex() {
-        return $this->render('index');
+        $request = $this->request();
+        $key = $request->get('key');
+        $model = (new Survey())->findByKey($key);
+        $this->viewParams['model'] = $model;
+        return $this->render('index', $this->viewParams);
     }
 
 }

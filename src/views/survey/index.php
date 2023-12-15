@@ -1,10 +1,11 @@
 <?php
 
 /** @var \yii\web\View $this */
+/** @var \dameter\app\models\Survey $model */
 \dameter\app\assets\LocalSurveyJsAsset::register($this);
-$surveyId = "test3";
-$fileName = Yii::getAlias("@runtime")."/surveys/$surveyId.json";
-$json = file_get_contents($fileName);
+
+$json = $model->structure;
+
 $url = \yii\helpers\Url::toRoute(["//api/response/save"]);
 $responseId = rand(1000000,9999999);
 
