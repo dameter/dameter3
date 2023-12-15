@@ -1,6 +1,9 @@
 <?php
 
 namespace dameter\app\models;
+use dameter\app\traits\KeyedRecordTrait;
+use yii\db\ActiveQuery;
+
 /**
  * @property int $respondent_id
  * @property int $survey_id
@@ -8,21 +11,29 @@ namespace dameter\app\models;
  * @property string $uuid
  * @property string $key
  * @property ?string $params json
+ *
+ * @property Survey $survey
  */
 class Respondent extends TimedActiveRecord
 {
+    use KeyedRecordTrait;
+
     public function rules()
     {
         return array_merge(parent::rules(),[
+            [['survey_id', 'status_id', 'uuid', 'key', 'language_id'], 'required'],
             [['uuid', 'key'], 'string', 'max' => 45],
             [['uuid', 'key'], 'unique'],
             [['params'], 'string'],
-            [['name'], 'string', 'max' => 255],
             [['language_id'], 'integer'],
             [['survey_id'], 'integer'],
 
         ]);
     }
 
+    public function getSurvey(): ActiveQuery
+    {
+        return $this->hasOne(Survey::class, ['survey_id' => 'survey_id']);
+    }
 
 }

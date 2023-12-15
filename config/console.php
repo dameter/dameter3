@@ -19,4 +19,5 @@ $config = [
 
 ];
 unset($config['components']['request']);
+unset($config['components']['user']);
 return $config;

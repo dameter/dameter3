@@ -24,7 +24,7 @@ return [
     ],
     'db' => [
         'class' => 'yii\db\Connection',
-        'dsn' => 'mysql:host=dameter_db;dbname=app',
+        'dsn' => 'mysql:host=127.0.0.1;dbname=app_test;port=8888',
         'username' => 'root',
         'password' => 'password',
         'charset' => 'utf8',

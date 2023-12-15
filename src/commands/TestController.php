@@ -1,6 +1,8 @@
 <?php
 namespace dameter\app\commands;
 
+use dameter\app\models\Language;
+use dameter\app\models\Respondent;
 use dameter\app\models\Status;
 use dameter\app\models\Survey;
 use dameter\app\traits\ApplicationAwareTrait;
@@ -31,6 +33,28 @@ class TestController extends Controller
         }
         $this->getApp()->info("saved survey");
         print_r($survey->attributes);
+
+
+    }
+
+    public function actionCreateRespondent(string $surveyKey, string $key) {
+
+        $survey = (new Survey())->findByKey($surveyKey);
+        $model = new Respondent([
+            'key' => $key,
+            'survey_id' => $survey->primaryKey,
+            'uuid' => Uuid::uuid4()->toString(),
+            'status_id' => Status::CREATED,
+            'language_id' => Language::ESTONIAN
+        ]);
+
+        if(!$model->save()) {
+            $this->getApp()->error("error saving model");
+            print_r($model->errors);
+            return;
+        }
+        $this->getApp()->info("saved model");
+        print_r($model->attributes);
 
 
     }

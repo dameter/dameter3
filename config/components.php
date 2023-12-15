@@ -12,6 +12,7 @@ return [
         'showScriptName' => false,
         'rules' => [
             '/s/<key:[\w-]+>' => 'survey/index',
+            '/go/<key:[\w-]+>' => 'survey/respondent',
         ],
     ],
     'user' => [

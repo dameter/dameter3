@@ -1,10 +1,16 @@
 <?php
 
 /** @var \yii\web\View $this */
-/** @var \dameter\app\models\Survey $model */
+/** @var Survey $survey */
+/** @var ?Respondent $respondent */
+
+use dameter\app\models\Respondent;
+use dameter\app\models\Survey;
+
 \dameter\app\assets\LocalSurveyJsAsset::register($this);
 
-$json = $model->structure;
+
+$json = $survey->structure;
 
 $url = \yii\helpers\Url::toRoute(["//api/response/save"]);
 $responseId = rand(1000000,9999999);

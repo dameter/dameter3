@@ -87,7 +87,7 @@ class m231215_093435_init extends Migration
         $this->createIndex('ix_response_status_time_completed', 'response', 'time_completed');
 
         $this->createIndex('ix_response_srv_nr', 'response', ['survey_id', 'nr'], true);
-        $this->createIndex('ix_response_srv_respondent', 'response', ['survey_id', 'respondent_id'], true);
+        $this->createIndex('ix_response_srv_respondent', 'response', ['survey_id', 'respondent_id']);
         $this->createIndex('ix_response_srv_uuid', 'response', ['survey_id', 'uuid'], true);
         $this->createIndex('ix_response_srv_status', 'response', ['survey_id', 'status_id']);
         $this->createIndex('ix_response_srv_time_created', 'response', ['survey_id', 'time_created']);
