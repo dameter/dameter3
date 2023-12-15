@@ -15,10 +15,6 @@ $respondentId = $respondent->uuid;
 $url = \yii\helpers\Url::toRoute(["//api/response/save"]);
 $responseId = rand(1000000,9999999);
 
-
-$response = (new \dameter\app\factories\ResponseFactory())->make($respondent, ["lasdkjfnsd"]);
-
-
 $this->registerJs(<<<JS
     let surveyJson =$json;
     let respondentUuid ='$respondentId';

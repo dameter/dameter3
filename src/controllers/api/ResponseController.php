@@ -51,11 +51,18 @@ class ResponseController extends BaseApiController
             return ["error"];
         }
 
-        $response = (new ResponseFactory())->make($respondent, $data['pageData']);
+        try {
+            (new ResponseFactory())->make($respondent, $data['pageData']);
+
+        } catch ( \Exception $e) {
+            //do not send to frontend, only log
+            $this->getApp()->error("error saving response:".$e->getTraceAsString());
+            return [""];
+        }
 
         \Yii::info(json_encode($respondent->attributes), __METHOD__);
         \Yii::info(json_encode($post), __METHOD__);
-        return ["kjsdfbsdfjk"];
+        return [""];
     }
 
 }

@@ -26,15 +26,12 @@ class TimedActiveRecord extends BaseActiverecord
 
     public function beforeSave($insert) : bool
     {
-        $this->getApp()->info("beforeSave");
         $parent = parent::beforeSave($insert);
         if(!$parent) {
-            $this->getApp()->info("parent beforeSave failed ");
             return $parent;
         }
         if($insert) {
             $time = $this->currentTimeForDb();
-            $this->getApp()->info("creating at time: ". $time);
             $this->time_created =$time;
             $this->time_updated =$time;
         }
