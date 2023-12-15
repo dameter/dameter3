@@ -4,6 +4,7 @@ namespace dameter\app\traits;
 
 use dameter\app\DameterConsoleApplication;
 use dameter\app\DameterWebApplication;
+use dameter\app\exceptions\DameterException;
 use Yii;
 
 trait ApplicationAwareTrait
@@ -21,7 +22,7 @@ trait ApplicationAwareTrait
         if($app instanceof DameterWebApplication) {
             return $app;
         }
-        throw new FlomtaException("invalid app type");
+        throw new DameterException("invalid app type");
     }
 
     public function isConsoleApp() : bool

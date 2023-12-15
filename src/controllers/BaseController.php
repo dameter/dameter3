@@ -2,9 +2,8 @@
 
 namespace dameter\app\controllers;
 
-use dameter\app\models\Survey;
+use dameter\app\exceptions\DameterException;
 use yii\web\Controller;
-use Yii;
 use yii\web\Request;
 
 class BaseController extends Controller
@@ -16,7 +15,7 @@ class BaseController extends Controller
         if($this->request instanceof Request) {
             return $this->request;
         }
-        throw new \DameterException("invalid request");
+        throw new DameterException("invalid request");
     }
 
 }
