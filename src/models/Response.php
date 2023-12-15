@@ -14,16 +14,16 @@ class Response extends TimedActiveRecord
     public function rules()
     {
         return array_merge(parent::rules(),[
+            [['nr'], 'required'],
             [['uuid'], 'string', 'max' => 45],
             [['uuid'], 'unique'],
-            [['nr'], 'integer'],
+            [['nr'], 'number'],
             [['status_id'], 'integer'],
             [['survey_id'], 'integer'],
             [['respondent_id'], 'integer'],
 
             [['data'], 'string'],
             [['time_completed'], 'string', 'max' => self::TIME_COL_LENGTH],
-            [['name'], 'string', 'max' => 255],
 
         ]);
     }

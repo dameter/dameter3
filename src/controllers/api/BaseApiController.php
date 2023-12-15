@@ -2,6 +2,7 @@
 namespace dameter\app\controllers\api;
 
 
+use dameter\app\traits\ApplicationAwareTrait;
 use yii\filters\ContentNegotiator;
 use yii\rest\Controller;
 use yii\filters\auth\CompositeAuth;
@@ -9,6 +10,7 @@ use yii\web\Response;
 
 class BaseApiController extends Controller
 {
+    use ApplicationAwareTrait;
 
     public function behaviors()
     {

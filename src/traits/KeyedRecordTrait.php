@@ -23,5 +23,17 @@ trait KeyedRecordTrait
         }
         return null;
     }
+    
+    public function findByUuid(string $uuid) : ?self
+    {
+        /** @var ActiveQuery $query */
+        $query = $this->find();
+        $query->andWhere(\Yii::$app->db->quoteColumnName('uuid').'=:uuid', [":uuid" => trim($uuid)]);
+        $model = $query->one();
+        if($model instanceof static) {
+            return  $model;
+        }
+        return null;
+    }
 
 }

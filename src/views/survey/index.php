@@ -11,12 +11,13 @@ use dameter\app\models\Survey;
 
 
 $json = $survey->structure;
-
+$respondentId = $respondent->uuid;
 $url = \yii\helpers\Url::toRoute(["//api/response/save"]);
 $responseId = rand(1000000,9999999);
 
 $this->registerJs(<<<JS
     let surveyJson =$json;
+    let respondentUuid ='$respondentId';
     const survey = new Survey.Model(surveyJson);
     survey.applyTheme(SurveyTheme.LayeredLight);
     
@@ -28,6 +29,7 @@ $this->registerJs(<<<JS
         var postData = {
             pageData: pageData,
             responseId: '$responseId',
+            respondent: respondentUuid,
         };
         
         document
