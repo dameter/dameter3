@@ -15,6 +15,7 @@
   },
   "author": "Tõnis Ormisson <tonis@andmemasin.eu>",
   "dependencies": {
+    "showdown": "^2.1.0",
     "survey-jquery": "^1.9.19"
   }
 }

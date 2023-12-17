@@ -21,6 +21,7 @@ class SurveyJsAsset extends AssetBundle
 
     public $depends = [
         \yii\web\JqueryAsset::class,
+        ShowdownAsset::class,
     ];
 
 }

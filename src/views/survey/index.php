@@ -20,6 +20,19 @@ $this->registerJs(<<<JS
     let respondentUuid ='$respondentId';
     const survey = new Survey.Model(surveyJson);
     survey.applyTheme(SurveyTheme.LayeredLight);
+
+    // Instantiate Showdown
+    const converter = new showdown.Converter();
+    survey.onTextMarkdown.add(function (survey, options) {
+        // Convert Markdown to HTML
+        let str = converter.makeHtml(options.text);
+        // Remove root paragraphs <p></p>
+        str = str.substring(3);
+        str = str.substring(0, str.length - 4);
+        // Set HTML markup to render
+        options.html = str;
+    });
+
     
     survey.onValueChanged
     .add(function (survey, options) {
