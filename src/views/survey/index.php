@@ -60,8 +60,7 @@ $this->registerJs(<<<JS
         let variableName = options.name;
         let variableValue = options.value;
         let pageData = {[variableName]: variableValue};
-        console.log(survey.currentPageNo);
-        var postData = {
+        let postData = {
             currentPageNo: parseInt(survey.currentPageNo),
             pageData: pageData,
             responseId: '$responseId',
