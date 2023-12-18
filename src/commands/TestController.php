@@ -23,13 +23,18 @@ class TestController extends Controller
         $fileName = Yii::getAlias("@runtime")."/surveys/$surveyId.json";
         $json = file_get_contents($fileName);
 
-        $survey = new Survey([
-            'key' => $surveyId,
-            'name' => $surveyId,
-            'uuid' => Uuid::uuid4()->toString(),
-            'structure' => $json,
-            'status_id' => Status::CREATED
-        ]);
+        $survey = (new Survey())->findByKey($surveyId);
+
+        if($survey == null ) {
+            $survey = new Survey([
+                'key' => $surveyId,
+                'name' => $surveyId,
+                'uuid' => Uuid::uuid4()->toString(),
+                'status_id' => Status::CREATED
+            ]);
+        }
+        $survey->structure = $json;
+
 
         if(!$survey->save()) {
             $this->getApp()->error("error saving survey");

@@ -2,6 +2,7 @@
 
 namespace respund\collector\controllers;
 
+use respund\collector\factories\ResponseFactory;
 use respund\collector\models\Respondent;
 use respund\collector\models\Survey;
 use yii\web\NotFoundHttpException;
@@ -27,6 +28,11 @@ class SurveyController extends BaseController
         $survey = $respondent->survey;
         $this->viewParams['survey'] = $survey;
         $this->viewParams['respondent'] = $respondent;
+        $response = $respondent->response;
+        if($response == null) {
+            $response = (new ResponseFactory())->make($respondent, []);
+        }
+        $this->viewParams['response'] = $response;
         return $this->render('index', $this->viewParams);
     }
 

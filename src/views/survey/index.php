@@ -2,28 +2,32 @@
 
 /** @var \yii\web\View $this */
 /** @var Survey $survey */
-/** @var ?Respondent $respondent */
+/** @var Respondent $respondent */
+/** @var Response $response */
 
 use respund\collector\models\Respondent;
+use respund\collector\models\Response;
 use respund\collector\models\Survey;
+use yii\helpers\Json;
 use yii\helpers\Url;
 
 \respund\collector\assets\LocalSurveyJsAsset::register($this);
 $ip = Yii::$app->getRequest()->getUserIP();
 
 $json = $survey->structure;
-$respondentId = $respondent->uuid;
 $url = Url::toRoute(["//api/response/save"]);
-$responseId = rand(1000000,9999999);
+$responseId = $response->uuid;
 $languageChangeUrl = Url::toRoute(["//api/response/language-change"]);
+$pageNumber = $response->pageNumber();
+$currentData = Json::encode($response->currentData());
+$currentPageNo = Json::encode($response->pageNumber());
 
 $this->registerJs(<<<JS
     let surveyJson =$json;
-    let respondentUuid ='$respondentId';
     const survey = new Survey.Model(surveyJson);
-
-    survey.applyTheme(SurveyTheme.LayeredLight);
-
+    survey.data = $currentData;
+    
+    survey.currentPageNo = $currentPageNo;
     // Instantiate Showdown
     const converter = new showdown.Converter();
     survey.onTextMarkdown.add(function (survey, options) {
@@ -44,9 +48,9 @@ $this->registerJs(<<<JS
             survey.locale = this.value;
             let pageData = {["language"]: survey.locale};
             var postData = {
+                currentPageNo: parseInt(survey.currentPageNo),
                 pageData: pageData,
                 responseId: '$responseId',
-                respondent: respondentUuid
             };
             saveData('$languageChangeUrl', postData)
         });  
@@ -56,10 +60,11 @@ $this->registerJs(<<<JS
         let variableName = options.name;
         let variableValue = options.value;
         let pageData = {[variableName]: variableValue};
+        console.log(survey.currentPageNo);
         var postData = {
+            currentPageNo: parseInt(survey.currentPageNo),
             pageData: pageData,
             responseId: '$responseId',
-            respondent: respondentUuid,
         };
         
         document

@@ -1,7 +1,8 @@
 <?php
 
 namespace respund\collector\models;
-use respund\collector\traits\KeyedRecordTrait;
+use respund\collector\traits\KeyRecordTrait;
+use respund\collector\traits\UuidRecordTrait;
 use yii\db\ActiveQuery;
 
 /**
@@ -17,7 +18,8 @@ use yii\db\ActiveQuery;
  */
 class Respondent extends TimedActiveRecord
 {
-    use KeyedRecordTrait;
+    use UuidRecordTrait;
+    use KeyRecordTrait;
 
     public function rules()
     {
@@ -30,6 +32,8 @@ class Respondent extends TimedActiveRecord
             [['survey_id'], 'integer'],
         ]);
     }
+
+
 
     public function getSurvey(): ActiveQuery
     {

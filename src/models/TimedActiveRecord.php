@@ -15,7 +15,8 @@ class TimedActiveRecord extends BaseActiverecord
 {
     use ApplicationAwareTrait;
 
-    const TIME_COL_LENGTH = 100; //FIXME ??
+    const TIME_COL_LENGTH = 32;
+
     public function rules()
     {
         return [

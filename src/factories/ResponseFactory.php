@@ -3,6 +3,7 @@ namespace respund\collector\factories;
 
 use respund\collector\models\Respondent;
 use respund\collector\models\Response;
+use respund\collector\models\ResponseData;
 use respund\collector\models\Status;
 use respund\collector\traits\ApplicationAwareTrait;
 use Ramsey\Uuid\Uuid;
@@ -18,21 +19,30 @@ class ResponseFactory
 
         $model = $this->findExisting($respondent);
         if(empty($model)) {
-            $this->makeNew($respondent);
+            $model = $this->makeNew($respondent);
         }
-        $currentData = $model->dataDecoded();
-        foreach ($data as $key => $value) {
+
+        return $this->saveData($model, $data);
+
+    }
+
+    public function saveData(Response $response, array $data) : Response
+    {
+
+        $currentData = $response->dataDecoded();
+        $currentData[ResponseData::COL_PAGE_NR] = intval($data[ResponseData::COL_PAGE_NR]);
+        foreach ($data['pageData'] as $key => $value) {
             if(is_numeric($value)) {
                 // convert to numeric
                 $value = $value +0;
             }
-            $currentData[$key] = $value;
+            $currentData[ResponseData::ATTRIBUTES ][$key] = $value;
         }
-        $model->data = Json::encode($currentData);
-        if($model->save()) {
-            return $model;
+        $response->data = Json::encode($currentData);
+        if($response->save()) {
+            return $response;
         }
-        throw new RespundException("Error saving response: ". json_encode($model->errors));
+        throw new RespundException("Error saving response: ". json_encode($response->errors));
 
     }
 
@@ -45,16 +55,23 @@ class ResponseFactory
     private function makeNew(Respondent $respondent) : Response
     {
 
+        $recordNr = ($respondent->survey->getResponses()->count()) +1;
         $params = [
             'survey_id' => $respondent->survey_id,
             'respondent_id' => $respondent->primaryKey,
             'uuid' => Uuid::uuid4()->toString(),
             'status_id' => Status::CREATED,
-            'nr' => 1,
+            'nr' => $recordNr,
+            'data' => json_encode([
+                ResponseData::COL_TIME_CREATED => $this->currentTimeForDb(),
+                ResponseData::COL_PAGE_NR => 0,
+                ResponseData::ATTRIBUTES => [],
+            ])
         ];
         $this->getApp()->info("new response", $params);
         return new Response($params);
 
     }
+
 
 }

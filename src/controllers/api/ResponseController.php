@@ -3,6 +3,7 @@
 namespace respund\collector\controllers\api;
 use respund\collector\factories\ResponseFactory;
 use respund\collector\models\Respondent;
+use respund\collector\models\Response;
 use Yii;
 
 class ResponseController extends BaseApiController
@@ -36,32 +37,34 @@ class ResponseController extends BaseApiController
         }
         $data = $post['data'];
 
-        if(!isset($data['respondent']) or empty($data['respondent'])) {
-            $this->getApp()->warning("no-respondent");
+        if(!isset($data['responseId']) or empty($data['responseId'])) {
+            $this->getApp()->warning("no-respondent",$data);
             return ["error"];
         }
         if(!isset($data['pageData']) or empty($data['pageData'])) {
-            $this->getApp()->warning("no-pagedata");
+            $this->getApp()->warning("no-pagedata", $data);
+            return ["error"];
+        }
+        if(!isset($data['currentPageNo'])) {
+            $this->getApp()->warning("no-pagenumber",$data);
             return ["error"];
         }
 
-        $respondentId = trim($data['respondent']);
-        $respondent = (new Respondent())->findByUuid($respondentId);
-        if(!($respondent instanceof Respondent)) {
-            $this->getApp()->warning("respondent-not-found");
+        $responseId = trim($data['responseId']);
+        $response = (new Response())->findByUuid($responseId);
+        if(!($response instanceof Response)) {
+            $this->getApp()->warning("respose-not-found");
             return ["error"];
         }
 
         try {
-            (new ResponseFactory())->make($respondent, $data['pageData']);
-
+            (new ResponseFactory())->saveData($response, $data);
         } catch ( \Exception $e) {
             //do not send to frontend, only log
             $this->getApp()->error("error saving response:".$e->getTraceAsString());
             return [""];
         }
 
-        \Yii::info(json_encode($respondent->attributes), __METHOD__);
         \Yii::info(json_encode($post), __METHOD__);
         return [""];
     }

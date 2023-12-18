@@ -2,7 +2,9 @@
 
 namespace respund\collector\models;
 
-use respund\collector\traits\KeyedRecordTrait;
+use respund\collector\traits\KeyRecordTrait;
+use respund\collector\traits\UuidRecordTrait;
+use yii\db\ActiveQuery;
 
 /**
  * @property string $key
@@ -13,7 +15,8 @@ use respund\collector\traits\KeyedRecordTrait;
  */
 class Survey extends TimedActiveRecord
 {
-    use KeyedRecordTrait;
+    use UuidRecordTrait;
+    use KeyRecordTrait;
 
     public function rules()
     {
@@ -22,6 +25,18 @@ class Survey extends TimedActiveRecord
             [['key', 'uuid'], 'string', 'max' => 45],
             [['name'], 'string', 'max' => 255],
         ]);
+    }
+
+    public function getRespondents(): ActiveQuery
+    {
+        return $this->hasMany(Respondent::class, ['survey_id' => 'survey_id'])
+            ->indexBy('uuid');
+    }
+
+    public function getResponses(): ActiveQuery
+    {
+        return $this->hasMany(Response::class, ['survey_id' => 'survey_id'])
+            ->indexBy('uuid');
     }
 
 }

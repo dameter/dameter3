@@ -2,7 +2,7 @@
 
 namespace respund\collector\models;
 
-use respund\collector\traits\KeyedRecordTrait;
+use respund\collector\traits\UuidRecordTrait;
 use yii\db\ActiveQuery;
 
 /**
