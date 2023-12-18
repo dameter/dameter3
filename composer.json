@@ -1,6 +1,6 @@
 {
-    "name": "dameter/app",
-    "description": "dameter",
+    "name": "respund/collector",
+    "description": "respund open survey software based on surveyjs",
     "type": "project",
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "dameter\\app\\": "src"
+            "respund\\collector\\": "src"
         }
     },
     "authors": [

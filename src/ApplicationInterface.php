@@ -1,6 +1,6 @@
 <?php
 
-namespace dameter\app;
+namespace respund\collector;
 
 interface ApplicationInterface
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace dameter\app\controllers;
+namespace respund\collector\controllers;
 
-use dameter\app\models\Respondent;
-use dameter\app\models\Survey;
+use respund\collector\models\Respondent;
+use respund\collector\models\Survey;
 use yii\web\NotFoundHttpException;
 
 class SurveyController extends BaseController

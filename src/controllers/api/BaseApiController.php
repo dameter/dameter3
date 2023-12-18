@@ -1,8 +1,9 @@
 <?php
-namespace dameter\app\controllers\api;
+namespace respund\collector\controllers\api;
 
 
-use dameter\app\traits\ApplicationAwareTrait;
+use respund\collector\traits\ApplicationAwareTrait;
+use yii\filters\AccessControl;
 use yii\filters\ContentNegotiator;
 use yii\rest\Controller;
 use yii\filters\auth\CompositeAuth;

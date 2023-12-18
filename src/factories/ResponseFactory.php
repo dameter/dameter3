@@ -1,12 +1,12 @@
 <?php
-namespace dameter\app\factories;
+namespace respund\collector\factories;
 
-use dameter\app\models\Respondent;
-use dameter\app\models\Response;
-use dameter\app\models\Status;
-use dameter\app\traits\ApplicationAwareTrait;
+use respund\collector\models\Respondent;
+use respund\collector\models\Response;
+use respund\collector\models\Status;
+use respund\collector\traits\ApplicationAwareTrait;
 use Ramsey\Uuid\Uuid;
-use dameter\app\exceptions\DameterException;
+use respund\collector\exceptions\RespundException;
 use yii\helpers\Json;
 
 class ResponseFactory
@@ -32,7 +32,7 @@ class ResponseFactory
         if($model->save()) {
             return $model;
         }
-        throw new DameterException("Error saving response: ". json_encode($model->errors));
+        throw new RespundException("Error saving response: ". json_encode($model->errors));
 
     }
 

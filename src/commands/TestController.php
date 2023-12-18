@@ -1,11 +1,11 @@
 <?php
-namespace dameter\app\commands;
+namespace respund\collector\commands;
 
-use dameter\app\models\Language;
-use dameter\app\models\Respondent;
-use dameter\app\models\Status;
-use dameter\app\models\Survey;
-use dameter\app\traits\ApplicationAwareTrait;
+use respund\collector\models\Language;
+use respund\collector\models\Respondent;
+use respund\collector\models\Status;
+use respund\collector\models\Survey;
+use respund\collector\traits\ApplicationAwareTrait;
 use Ramsey\Uuid\Uuid;
 use yii\console\Controller;
 use Yii;
@@ -15,6 +15,9 @@ class TestController extends Controller
     use ApplicationAwareTrait;
 
     public function actionCreateSurvey(string $surveyId) {
+
+        // create survey entity from a json file
+
         $fileName = Yii::getAlias("@runtime")."/surveys/$surveyId.json";
         $json = file_get_contents($fileName);
 
@@ -32,7 +35,6 @@ class TestController extends Controller
             return;
         }
         $this->getApp()->info("saved survey");
-        print_r($survey->attributes);
 
 
     }

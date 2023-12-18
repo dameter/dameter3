@@ -1,9 +1,9 @@
 <?php
 
-namespace dameter\app\traits;
+namespace respund\collector\traits;
 
-use dameter\app\DameterConsoleApplication;
-use dameter\app\models\User;
+use respund\collector\RespundConsoleApplication;
+use respund\collector\models\User;
 use Psr\Log\LogLevel;
 use Yii;
 
@@ -14,7 +14,7 @@ use Yii;
 trait ApplicationTrait
 {
     public ?User $identity = null;
-    private string $logCategory = "dameter\app";
+    private string $logCategory = "respund\collector";
 
 
     public function info(string $message, array $context = []) : void
@@ -49,7 +49,7 @@ trait ApplicationTrait
         } else {
             $data = json_decode($message, true);
         }
-        if($this instanceof DameterConsoleApplication) {
+        if($this instanceof RespundConsoleApplication) {
             echo $message . PHP_EOL;
         }
 

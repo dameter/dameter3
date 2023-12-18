@@ -1,6 +1,6 @@
 <?php
 
-namespace dameter\app\traits;
+namespace respund\collector\traits;
 
 use yii\db\ActiveQuery;
 use yii\db\Expression;

@@ -1,8 +1,8 @@
 <?php
 
-namespace dameter\app\models;
+namespace respund\collector\models;
 
-use dameter\app\traits\ApplicationAwareTrait;
+use respund\collector\traits\ApplicationAwareTrait;
 use yii\db\ActiveRecord as BaseActiverecord;
 
 

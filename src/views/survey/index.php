@@ -4,12 +4,12 @@
 /** @var Survey $survey */
 /** @var ?Respondent $respondent */
 
-use dameter\app\models\Respondent;
-use dameter\app\models\Survey;
+use respund\collector\models\Respondent;
+use respund\collector\models\Survey;
 use yii\helpers\Url;
 
-\dameter\app\assets\LocalSurveyJsAsset::register($this);
-
+\respund\collector\assets\LocalSurveyJsAsset::register($this);
+$ip = Yii::$app->getRequest()->getUserIP();
 
 $json = $survey->structure;
 $respondentId = $respondent->uuid;

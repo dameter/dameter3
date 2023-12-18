@@ -6,4 +6,4 @@ require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
 
 $config = require(__DIR__ . '/../config/web.php');
 
-(new \dameter\app\DameterWebApplication($config))->run();
+(new \respund\collector\RespundWebApplication($config))->run();

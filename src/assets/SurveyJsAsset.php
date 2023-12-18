@@ -1,5 +1,5 @@
 <?php
-namespace dameter\app\assets;
+namespace respund\collector\assets;
 
 use yii\web\AssetBundle;
 use yii\web\YiiAsset;

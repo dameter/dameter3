@@ -1,7 +1,7 @@
 {
-  "name": "dameter-app",
+  "name": "respund-collector",
   "version": "1.0.0",
-  "description": "Dameter survey data collector",
+  "description": "Respund collector",
   "main": "index.js",
   "directories": {
     "test": "tests"
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+git@github.com:dameter/dameter3.git"
+    "url": "git+git@github.com:respund/collector.git"
   },
   "author": "Tõnis Ormisson <tonis@andmemasin.eu>",
   "dependencies": {

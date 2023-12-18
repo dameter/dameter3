@@ -1,7 +1,7 @@
 <?php
 
-namespace dameter\app\models;
-use dameter\app\traits\KeyedRecordTrait;
+namespace respund\collector\models;
+use respund\collector\traits\KeyedRecordTrait;
 use yii\db\ActiveQuery;
 
 /**

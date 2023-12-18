@@ -2,7 +2,7 @@ version: '3'
 services:
   nginx:
     image: evild/alpine-nginx:1.9.15-openssl
-    container_name: dameter_nginx
+    container_name: respund_nginx
     volumes:
       - ./:/var/www/html/:ro
       - ./docker/nginx/conf/nginx.conf:/etc/nginx/conf/nginx.conf:ro
@@ -16,7 +16,7 @@ services:
       - php
   php:
     build: docker/php
-    container_name: dameter_php
+    container_name: respund_php
 
     volumes:
       - ./:/var/www/html
@@ -32,7 +32,7 @@ services:
 
   db:
     image: mariadb:latest
-    container_name: dameter_db
+    container_name: respund_db
     volumes:
       - ./.mysql:/var/lib/mysql
       - ./init/db/init.sql:/docker-entrypoint-initdb.d/init.sql

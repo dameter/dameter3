@@ -1,6 +1,6 @@
 <?php
 
-namespace dameter\app\models;
+namespace respund\collector\models;
 
 use yii\helpers\Json;
 

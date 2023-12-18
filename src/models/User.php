@@ -1,6 +1,6 @@
 <?php
 
-namespace dameter\app\models;
+namespace respund\collector\models;
 
 class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 {

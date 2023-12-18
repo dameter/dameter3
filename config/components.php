@@ -16,7 +16,7 @@ return [
         ],
     ],
     'user' => [
-        'identityClass' => \dameter\app\models\User::class,
+        'identityClass' => \respund\collector\models\User::class,
         'enableAutoLogin' => true,
     ],
     'cache' => [

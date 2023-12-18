@@ -1,6 +1,6 @@
 <?php
 
-namespace dameter\app\controllers;
+namespace respund\collector\controllers;
 use yii\web\Controller;
 
 class SiteController extends Controller

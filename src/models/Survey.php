@@ -1,8 +1,8 @@
 <?php
 
-namespace dameter\app\models;
+namespace respund\collector\models;
 
-use dameter\app\traits\KeyedRecordTrait;
+use respund\collector\traits\KeyedRecordTrait;
 
 /**
  * @property string $key

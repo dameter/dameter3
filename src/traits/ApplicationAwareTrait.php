@@ -1,33 +1,33 @@
 <?php
 
-namespace dameter\app\traits;
+namespace respund\collector\traits;
 
-use dameter\app\DameterConsoleApplication;
-use dameter\app\DameterWebApplication;
-use dameter\app\exceptions\DameterException;
+use respund\collector\RespundConsoleApplication;
+use respund\collector\RespundWebApplication;
+use respund\collector\exceptions\RespundException;
 use Yii;
 
 trait ApplicationAwareTrait
 {
-    public function getApp() : DameterConsoleApplication|DameterWebApplication
+    public function getApp() : RespundConsoleApplication|RespundWebApplication
     {
-        /** @var DameterConsoleApplication|DameterWebApplication $app */
+        /** @var RespundConsoleApplication|RespundWebApplication $app */
         $app =  Yii::$app;
         return $app;
     }
 
-    public function getWebApp() : DameterWebApplication
+    public function getWebApp() : RespundWebApplication
     {
         $app = $this->getApp();
-        if($app instanceof DameterWebApplication) {
+        if($app instanceof RespundWebApplication) {
             return $app;
         }
-        throw new DameterException("invalid app type");
+        throw new RespundException("invalid app type");
     }
 
     public function isConsoleApp() : bool
     {
-        return $this->getApp() instanceof DameterConsoleApplication;
+        return $this->getApp() instanceof RespundConsoleApplication;
     }
 
     public function currentTime() : \DateTime

@@ -5,12 +5,12 @@ $aliases = require_once(__DIR__ . '/aliases.php');
 $components = require_once(__DIR__ . '/components.php');
 
 $config = [
-    'id' => 'dameter-app',
-    'name' => 'dameter-app',
+    'id' => 'respund-collector',
+    'name' => 'respund-collector',
     'aliases' => $aliases,
     'basePath' => dirname(__DIR__)."/src",
     'runtimePath' => dirname(__DIR__) . '/runtime',
-    'controllerNamespace' => "dameter\app\commands",
+    'controllerNamespace' => "respund\collector\commands",
     'language' =>'et',
     'bootstrap' => ['log'],
 

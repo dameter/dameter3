@@ -1,8 +1,8 @@
 <?php
 
-namespace dameter\app\controllers\api;
-use dameter\app\factories\ResponseFactory;
-use dameter\app\models\Respondent;
+namespace respund\collector\controllers\api;
+use respund\collector\factories\ResponseFactory;
+use respund\collector\models\Respondent;
 use Yii;
 
 class ResponseController extends BaseApiController
@@ -17,6 +17,7 @@ class ResponseController extends BaseApiController
 
     public function actionIndex()
     {
+
         Yii::info("post data", __METHOD__);
         return ["kjsdfbsdfjk"];
     }

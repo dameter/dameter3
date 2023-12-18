@@ -1,8 +1,8 @@
 <?php
 
-namespace dameter\app\controllers;
+namespace respund\collector\controllers;
 
-use dameter\app\exceptions\DameterException;
+use respund\collector\exceptions\RespundException;
 use yii\web\Controller;
 use yii\web\Request;
 
@@ -15,7 +15,7 @@ class BaseController extends Controller
         if($this->request instanceof Request) {
             return $this->request;
         }
-        throw new DameterException("invalid request");
+        throw new RespundException("invalid request");
     }
 
 }
