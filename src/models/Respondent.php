@@ -13,7 +13,7 @@ use yii\db\ActiveQuery;
  * @property ?string $params json
  *
  * @property Survey $survey
- * @property Response $response
+ * @property ?Response $response
  */
 class Respondent extends TimedActiveRecord
 {
@@ -22,13 +22,12 @@ class Respondent extends TimedActiveRecord
     public function rules()
     {
         return array_merge(parent::rules(),[
-            [['survey_id', 'status_id', 'uuid', 'key', 'language_id'], 'required'],
-            [['uuid', 'key'], 'string', 'max' => 45],
-            [['uuid', 'key'], 'unique'],
+            [['survey_id', 'status_id', 'uuid', 'language_id', 'key'], 'required'],
+            [['uuid','key'], 'string', 'max' => 45],
+            [['uuid'], 'unique'],
             [['params'], 'string'],
             [['language_id'], 'integer'],
             [['survey_id'], 'integer'],
-
         ]);
     }
 

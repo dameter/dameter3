@@ -1,5 +1,6 @@
 <?php
 
+use yii\db\Expression;
 use yii\db\Migration;
 
 /**
@@ -12,6 +13,24 @@ class m231215_093435_init extends Migration
      */
     public function safeUp()
     {
+        $this->makeSurvey();
+        $this->makeRespondent();
+        $this->makeResponse();
+        $this->makeSetting();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function safeDown()
+    {
+        $this->dropTable('setting');
+        $this->dropTable('response');
+        $this->dropTable('respondent');
+        $this->dropTable('survey');
+    }
+
+    private function makeSurvey() {
         $this->createTable('survey', [
             'survey_id' => $this->primaryKey(),
             'status_id' => $this->integer()->notNull(),
@@ -34,6 +53,11 @@ class m231215_093435_init extends Migration
         $this->createIndex('ix_survey_time_created', 'survey', 'time_created');
         $this->createIndex('ix_survey_time_updated', 'survey', 'time_updated');
 
+    }
+
+
+    private function makeRespondent() : void
+    {
         $this->createTable('respondent', [
             'respondent_id' => $this->primaryKey(),
             'survey_id' => $this->integer(),
@@ -47,7 +71,8 @@ class m231215_093435_init extends Migration
             'time_completed' => $this->dateTime(6)->null(),
         ]);
 
-        $this->addForeignKey('fk_respondent_survey', 'respondent', 'survey_id', 'survey', 'survey_id');
+        $this->addForeignKey('fk_respondent_survey', 'respondent', 'survey_id', 'survey', 'survey_id',
+            new Expression("CASCADE"), new Expression("CASCADE"));
 
         $this->createIndex('ix_respondent_status', 'respondent', 'status_id');
         $this->createIndex('ix_respondent_language', 'respondent', 'language_id');
@@ -57,11 +82,15 @@ class m231215_093435_init extends Migration
         $this->createIndex('ix_respondent_time_updated', 'respondent', 'time_updated');
         $this->createIndex('ix_respondent_time_completed', 'respondent', 'time_completed');
 
-        $this->createIndex('ix_response_srv_status', 'respondent', ['survey_id', 'status_id']);
-        $this->createIndex('ix_response_srv_language', 'respondent', ['survey_id', 'language_id']);
-        $this->createIndex('ix_response_srv_time_created', 'respondent', ['survey_id', 'time_created']);
-        $this->createIndex('ix_response_srv_time_updated', 'respondent', ['survey_id', 'time_updated']);
-        $this->createIndex('ix_response_srv_time_completed', 'respondent', ['survey_id', 'time_completed']);
+        $this->createIndex('ix_respondent_srv_status', 'respondent', ['survey_id', 'status_id']);
+        $this->createIndex('ix_respondent_srv_language', 'respondent', ['survey_id', 'language_id']);
+        $this->createIndex('ix_respondent_srv_time_created', 'respondent', ['survey_id', 'time_created']);
+        $this->createIndex('ix_respondent_srv_time_updated', 'respondent', ['survey_id', 'time_updated']);
+        $this->createIndex('ix_respondent_srv_time_completed', 'respondent', ['survey_id', 'time_completed']);
+    }
+
+    private function makeResponse() : void
+    {
 
 
         $this->createTable('response', [
@@ -77,8 +106,10 @@ class m231215_093435_init extends Migration
             'time_completed' => $this->dateTime(6)->null(),
         ]);
 
-        $this->addForeignKey('fk_response_survey', 'response', 'survey_id', 'survey', 'survey_id');
-        $this->addForeignKey('fk_response_respondent', 'response', 'respondent_id', 'respondent', 'respondent_id');
+        $this->addForeignKey('fk_response_survey', 'response', 'survey_id', 'survey', 'survey_id',
+            new Expression("CASCADE"), new Expression("CASCADE"));
+        $this->addForeignKey('fk_response_respondent', 'response', 'respondent_id', 'respondent', 'respondent_id',
+            new Expression("CASCADE"), new Expression("CASCADE"));
 
         $this->createIndex('ix_response_uuid', 'response', 'uuid', true);
         $this->createIndex('ix_response_status', 'response', 'status_id');
@@ -93,16 +124,19 @@ class m231215_093435_init extends Migration
         $this->createIndex('ix_response_srv_time_created', 'response', ['survey_id', 'time_created']);
         $this->createIndex('ix_response_srv_time_updated', 'response', ['survey_id', 'time_updated']);
         $this->createIndex('ix_response_srv_time_completed', 'response', ['survey_id', 'time_completed']);
-
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function safeDown()
+
+
+    private function makeSetting() : void
     {
-        $this->dropTable('response');
-        $this->dropTable('respondent');
-        $this->dropTable('survey');
+        $this->createTable('setting', [
+            'setting_id' => $this->primaryKey(),
+            'name'  => $this->string(255)->notNull()->unique(),
+            'value' => $this->text(),
+        ]);
+        $this->createIndex('ix_setting_name', 'setting', 'name', true);
+        $this->insert('setting', ['name' => 'keyLength', 'value' => 1]);
+
     }
 }

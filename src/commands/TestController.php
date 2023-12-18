@@ -1,10 +1,12 @@
 <?php
 namespace respund\collector\commands;
 
+use respund\collector\factories\RespondentFactory;
 use respund\collector\models\Language;
 use respund\collector\models\Respondent;
 use respund\collector\models\Status;
 use respund\collector\models\Survey;
+use respund\collector\services\RespondentGenerationService;
 use respund\collector\traits\ApplicationAwareTrait;
 use Ramsey\Uuid\Uuid;
 use yii\console\Controller;
@@ -42,13 +44,8 @@ class TestController extends Controller
     public function actionCreateRespondent(string $surveyKey, string $key) {
 
         $survey = (new Survey())->findByKey($surveyKey);
-        $model = new Respondent([
-            'key' => $key,
-            'survey_id' => $survey->primaryKey,
-            'uuid' => Uuid::uuid4()->toString(),
-            'status_id' => Status::CREATED,
-            'language_id' => Language::ESTONIAN
-        ]);
+        $model = (new RespondentFactory())->makeBase($survey, $key);
+
 
         if(!$model->save()) {
             $this->getApp()->error("error saving model");
@@ -57,7 +54,12 @@ class TestController extends Controller
         }
         $this->getApp()->info("saved model");
         print_r($model->attributes);
+    }
 
-
+    public function actionGenerate(string $surveyKey, int $amount = 1)
+    {
+        $survey = (new Survey())->findByKey($surveyKey);
+        $service = new RespondentGenerationService($survey, $amount);
+        $service->run();
     }
 }

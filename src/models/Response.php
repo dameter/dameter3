@@ -16,7 +16,7 @@ class Response extends TimedActiveRecord
     public function rules()
     {
         return array_merge(parent::rules(),[
-            [['nr'], 'required'],
+            [['nr', 'respondent_id'], 'required'],
             [['uuid'], 'string', 'max' => 45],
             [['uuid'], 'unique'],
             [['nr'], 'number'],
