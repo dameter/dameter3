@@ -65,4 +65,10 @@ class ResponseController extends BaseApiController
         return [""];
     }
 
+
+    public function actionLanguageChange()
+    {
+        return [""];
+    }
+
 }

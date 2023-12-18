@@ -2,6 +2,8 @@
 
 namespace dameter\app\models;
 
+use yii\helpers\Json;
+
 /**
  * @property int $response_id
  * @property int $nr sequence nr within one survey
@@ -26,6 +28,15 @@ class Response extends TimedActiveRecord
             [['time_completed'], 'string', 'max' => self::TIME_COL_LENGTH],
 
         ]);
+    }
+
+    public function dataDecoded() : array
+    {
+        $data = Json::decode($this->data);
+        if(empty($data)) {
+            $data = [];
+        }
+        return $data;
     }
 
 

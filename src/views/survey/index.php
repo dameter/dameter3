@@ -6,19 +6,22 @@
 
 use dameter\app\models\Respondent;
 use dameter\app\models\Survey;
+use yii\helpers\Url;
 
 \dameter\app\assets\LocalSurveyJsAsset::register($this);
 
 
 $json = $survey->structure;
 $respondentId = $respondent->uuid;
-$url = \yii\helpers\Url::toRoute(["//api/response/save"]);
+$url = Url::toRoute(["//api/response/save"]);
 $responseId = rand(1000000,9999999);
+$languageChangeUrl = Url::toRoute(["//api/response/language-change"]);
 
 $this->registerJs(<<<JS
     let surveyJson =$json;
     let respondentUuid ='$respondentId';
     const survey = new Survey.Model(surveyJson);
+
     survey.applyTheme(SurveyTheme.LayeredLight);
 
     // Instantiate Showdown
@@ -34,8 +37,22 @@ $this->registerJs(<<<JS
     });
 
     
-    survey.onValueChanged
-    .add(function (survey, options) {
+    
+    survey.onAfterRenderSurvey.add(function (survey) {
+        let languageChanger = document.getElementById('languageChanger');
+        languageChanger.addEventListener('change',function(){
+            survey.locale = this.value;
+            let pageData = {["language"]: survey.locale};
+            var postData = {
+                pageData: pageData,
+                responseId: '$responseId',
+                respondent: respondentUuid
+            };
+            saveData('$languageChangeUrl', postData)
+        });  
+    });
+
+    survey.onValueChanged.add(function (survey, options) {
         let variableName = options.name;
         let variableValue = options.value;
         let pageData = {[variableName]: variableValue};
@@ -59,7 +76,11 @@ JS
     , $this::POS_READY);
 
 ?>
-
+<select name="cars" id="languageChanger">
+    <option value="et">Eesti</option>
+    <option value="ru">Vene</option>
+    <option value="en-US">English</option>
+</select>
 <div id="surveyContainer" ></div>
 <div id="surveyResult" ></div>
 

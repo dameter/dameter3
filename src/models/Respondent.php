@@ -13,6 +13,7 @@ use yii\db\ActiveQuery;
  * @property ?string $params json
  *
  * @property Survey $survey
+ * @property Response $response
  */
 class Respondent extends TimedActiveRecord
 {
@@ -34,6 +35,11 @@ class Respondent extends TimedActiveRecord
     public function getSurvey(): ActiveQuery
     {
         return $this->hasOne(Survey::class, ['survey_id' => 'survey_id']);
+    }
+
+    public function getResponse(): ActiveQuery
+    {
+        return $this->hasOne(Response::class, ['respondent_id' => 'respondent_id']);
     }
 
 }

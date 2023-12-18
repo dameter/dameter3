@@ -9,15 +9,14 @@ let surveyValueChanged = function (survey, options) {
     }
 };
 
+
 function saveData(url, data){
     $.ajax({
         url: url,
         type: 'POST',
         data: {data},
         success: function(result) {
-            if(result.hasOwnProperty('languageChanged') && result.languageChanged) {
-                window.location.reload();
-            }
+            console.log('post-ok:');
         },
         error: function (xhr, ajaxOptions, thrownError) {
             console.log('failed:' + thrownError.toString());

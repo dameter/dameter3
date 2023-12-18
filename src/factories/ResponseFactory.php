@@ -7,19 +7,42 @@ use dameter\app\models\Status;
 use dameter\app\traits\ApplicationAwareTrait;
 use Ramsey\Uuid\Uuid;
 use dameter\app\exceptions\DameterException;
+use yii\helpers\Json;
 
 class ResponseFactory
 {
     use ApplicationAwareTrait;
 
-    public function make(Respondent $respondent, array $data)
+    public function make(Respondent $respondent, array $data) : Response
     {
-        $model = $this->makeNew($respondent, $data);
-        return $model;
+
+        $model = $this->findExisting($respondent);
+        if(empty($model)) {
+            $this->makeNew($respondent);
+        }
+        $currentData = $model->dataDecoded();
+        foreach ($data as $key => $value) {
+            if(is_numeric($value)) {
+                // convert to numeric
+                $value = $value +0;
+            }
+            $currentData[$key] = $value;
+        }
+        $model->data = Json::encode($currentData);
+        if($model->save()) {
+            return $model;
+        }
+        throw new DameterException("Error saving response: ". json_encode($model->errors));
 
     }
 
-    private function makeNew(Respondent $respondent, array $data) : Response
+    private function findExisting(Respondent $respondent) : ?Response
+    {
+        return $respondent->response;
+
+    }
+
+    private function makeNew(Respondent $respondent) : Response
     {
 
         $params = [
@@ -30,12 +53,8 @@ class ResponseFactory
             'nr' => 1,
         ];
         $this->getApp()->info("new response", $params);
-        $model = new Response($params);
+        return new Response($params);
 
-        if($model->save()) {
-            return $model;
-        }
-        throw new DameterException("Error saving response: ". json_encode($model->errors));
     }
 
 }
