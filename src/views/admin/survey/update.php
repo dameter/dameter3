@@ -64,4 +64,3 @@ JS
 </div>
 
 <?php ActiveForm::end(); ?>
-

@@ -2,5 +2,3 @@ parameters:
 	ignoreErrors:
 		-
 			message: "#^Strict comparison using \\=\\=\\= between 'prod' and 'dev' will always evaluate to false\\.$#"
-			count: 1
-			path: src/assets/LocalSurveyJsAsset.php
