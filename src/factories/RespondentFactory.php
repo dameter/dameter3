@@ -46,6 +46,9 @@ class RespondentFactory
     private function generateKey() : string
     {
         $setting = (new Setting())->findByName(Setting::KEY_LENGTH);
+        if($setting == null) {
+            throw new RespundException("Invalid Setting key " . Setting::KEY_LENGTH);
+        }
 
         $this->keyLength = intval($setting->value);
         $context = [

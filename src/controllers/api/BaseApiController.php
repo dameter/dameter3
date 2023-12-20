@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace respund\collector\controllers\api;
 
 
+use respund\collector\exceptions\RespundException;
 use respund\collector\traits\ApplicationAwareTrait;
 use respund\collector\traits\WebControllerTrait;
 use yii\filters\ContentNegotiator;
@@ -41,6 +42,9 @@ class BaseApiController extends Controller
      */
     protected function logContext() : array
     {
+        if($this->action === null) {
+            throw new RespundException("Action missing");
+        }
         return [
             'module' =>'api',
             'controller' => static::class,

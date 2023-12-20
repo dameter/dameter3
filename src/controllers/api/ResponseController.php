@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace respund\collector\controllers\api;
+use respund\collector\exceptions\RespundException;
 use respund\collector\factories\ResponseFactory;
 use respund\collector\models\Respondent;
 use respund\collector\models\Response;
@@ -13,6 +14,9 @@ class ResponseController extends BaseApiController
 
     public function beforeAction($action) : bool
     {
+        if($this->action === null) {
+            throw new RespundException("Action missing");
+        }
         Yii::info("API action:".$this->id."/".$this->action->id, __METHOD__);
         return parent::beforeAction($action);
     }

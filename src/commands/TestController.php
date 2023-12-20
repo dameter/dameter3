@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace respund\collector\commands;
 
+use respund\collector\exceptions\RespundException;
 use respund\collector\factories\RespondentFactory;
 use respund\collector\models\Status;
 use respund\collector\models\Survey;
@@ -28,7 +29,7 @@ class TestController extends Controller
             echo "invalid file ";
             return;
         }
-        $survey = (new Survey())->findByKey($surveyId);
+        $survey = $this->findSurvey($surveyId);
 
         if($survey == null ) {
             $survey = new Survey([
@@ -55,7 +56,7 @@ class TestController extends Controller
     public function actionCreateRespondent(string $surveyKey, string $key) : void
     {
 
-        $survey = (new Survey())->findByKey($surveyKey);
+        $survey = $this->findSurvey($surveyKey);
         $model = (new RespondentFactory())->makeBase($survey, $key);
 
 
@@ -70,8 +71,18 @@ class TestController extends Controller
 
     public function actionGenerate(string $surveyKey, int $amount = 1) : void
     {
-        $survey = (new Survey())->findByKey($surveyKey);
+        $survey = $this->findSurvey($surveyKey);
         $service = new RespondentGenerationService($survey, $amount);
         $service->run();
+    }
+
+    private function findSurvey(string $surveyKey) : Survey
+    {
+        $survey = (new Survey())->findByKey($surveyKey);
+        if($survey === null) {
+            throw new RespundException("Survey not found");
+        }
+        return $survey;
+
     }
 }
