@@ -6,6 +6,7 @@
 use respund\collector\models\Survey;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use respund\collector\Translate;
 
 $bundle = \respund\collector\assets\MonacoEditorAsset::register($this);
 $code = $survey->structure;
@@ -49,18 +50,17 @@ $this->registerJs(<<<JS
 JS
     , $this::POS_END);
 
+
 ?>
 <div id="container" style="width:100%;height:90vh;border:1px solid grey"></div>
 
 
-<?php $form = ActiveForm::begin([
-    'enableClientValidation' => false
-]); ?>
+<?php $form = ActiveForm::begin(); ?>
 <?= $form->field($survey, 'structure')->hiddenInput()->label(false) ?>
 
 <div class="form-group">
-    <?= Html::submitButton($survey->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $survey->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    <div><?=Yii::t('');?></div>
+    <?= Html::submitButton($survey->isNewRecord ? Translate::t('Create') : Translate::t('Update'), ['class' => $survey->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    <div><?= Translate::t("Or Ctrl-s on keyboard ...");?></div>
 </div>
 
 <?php ActiveForm::end(); ?>

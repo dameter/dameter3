@@ -19,6 +19,7 @@ return [
 
     'googleApiKey' => '',
     'developmentIps' =>['*'],
+    'adminIps' => ['*'],
 
     'cloudwatch' => [
         'key' => '',

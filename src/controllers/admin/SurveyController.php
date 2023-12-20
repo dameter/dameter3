@@ -3,6 +3,7 @@
 namespace respund\collector\controllers\admin;
 
 use respund\collector\models\Survey;
+use respund\collector\Translate;
 use yii\base\UserException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -10,9 +11,12 @@ use Yii;
 
 class SurveyController extends BaseAdminController
 {
+    public function actionIndex()
+    {
+        return "works";
+    }
     public function actionUpdate()
     {
-
 
         $surveyKey = $this->request()->get('key');
         if(empty($surveyKey)) {
@@ -29,7 +33,6 @@ class SurveyController extends BaseAdminController
             if($survey->load($post) && $survey->save()) {
                 return ["saved"];
             } else {
-                return $this->request()->post();
                 return ["errors" => $survey->errors];
 
             }
@@ -37,10 +40,13 @@ class SurveyController extends BaseAdminController
         }
 
         if($this->request()->isPost) {
-            var_dump($this->request()->post());die;
-            if($survey->load($this->request()->post()) && $survey->save()) {
+            if($survey->load($this->request()->post())) {
+                if ($survey->save()) {
+                    // saved
 
-                // saved
+                } else {
+                    // Todo
+                }
             }
         }
 

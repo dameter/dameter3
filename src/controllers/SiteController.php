@@ -1,9 +1,8 @@
 <?php
 
 namespace respund\collector\controllers;
-use yii\web\Controller;
 
-class SiteController extends Controller
+class SiteController extends BaseController
 {
 
     /**
@@ -27,5 +26,6 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
+
 
 }

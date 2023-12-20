@@ -21,7 +21,7 @@ class AppAsset extends AssetBundle
     ];
 
     public $depends = [
+        YiiAsset::class,
         \yii\bootstrap5\BootstrapAsset::class,
-        YiiAsset::class
     ];
 }
