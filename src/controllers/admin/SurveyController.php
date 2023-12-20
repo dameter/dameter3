@@ -36,7 +36,7 @@ class SurveyController extends BaseAdminController
         }
 
         if($this->request()->isAjax) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
+            $this->response()->format = Response::FORMAT_JSON;
             $post = $this->request()->post();
             if($survey->load($post) && $survey->save()) {
                 return ["saved"];

@@ -1,6 +1,7 @@
 <?php
 
-/** @var \yii\web\View $this */
+/** @var \respund\collector\app\View $this */
+/** @var \respund\collector\app\View $this */
 /** @var Survey $survey */
 
 use respund\collector\models\Survey;

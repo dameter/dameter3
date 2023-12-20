@@ -22,8 +22,12 @@ class TestController extends Controller
         // create survey entity from a json file
 
         $fileName = Yii::getAlias("@runtime")."/surveys/$surveyId.json";
-        $json = file_get_contents($fileName);
 
+        $json = file_get_contents($fileName);
+        if(!$json) {
+            echo "invalid file ";
+            return;
+        }
         $survey = (new Survey())->findByKey($surveyId);
 
         if($survey == null ) {

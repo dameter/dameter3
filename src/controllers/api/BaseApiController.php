@@ -5,7 +5,7 @@ namespace respund\collector\controllers\api;
 
 
 use respund\collector\traits\ApplicationAwareTrait;
-use yii\filters\AccessControl;
+use respund\collector\traits\WebControllerTrait;
 use yii\filters\ContentNegotiator;
 use yii\rest\Controller;
 use yii\filters\auth\CompositeAuth;
@@ -14,6 +14,7 @@ use yii\web\Response;
 class BaseApiController extends Controller
 {
     use ApplicationAwareTrait;
+    use WebControllerTrait;
 
     /**
      * @return array<string, mixed>
@@ -46,6 +47,7 @@ class BaseApiController extends Controller
             'action' => $this->action->id,
         ];
     }
+
 
 
 }

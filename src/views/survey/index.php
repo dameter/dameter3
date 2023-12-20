@@ -1,6 +1,6 @@
 <?php
 
-/** @var \yii\web\View $this */
+/** @var \respund\collector\app\View $this */
 /** @var Survey $survey */
 /** @var Respondent $respondent */
 /** @var Response $response */
@@ -12,7 +12,6 @@ use yii\helpers\Json;
 use yii\helpers\Url;
 
 \respund\collector\assets\LocalSurveyJsAsset::register($this);
-$ip = Yii::$app->getRequest()->getUserIP();
 
 $json = $survey->structure;
 $url = Url::toRoute(["//api/response/save"]);

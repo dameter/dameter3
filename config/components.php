@@ -17,7 +17,7 @@ return [
         ],
     ],
     'user' => [
-        'identityClass' => \respund\collector\models\User::class,
+        'identityClass' => "todo",
         'enableAutoLogin' => true,
     ],
     'cache' => [
@@ -25,7 +25,7 @@ return [
         'fileMode' => 0777,
         'dirMode' => 0777,
     ],
-
+    'view' => \respund\collector\app\View::class,
 
     'request' => [
         // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation

@@ -23,7 +23,7 @@ class ResponseController extends BaseApiController
      */
     public function actionSave() : array
     {
-        $request = \Yii::$app->request;
+        $request =  $this->request();
         if(!$request->getIsPost()) {
             Yii::info("no data", __METHOD__);
             return ["no-data"];
@@ -63,7 +63,7 @@ class ResponseController extends BaseApiController
             return [""];
         }
 
-        \Yii::info(json_encode($post), __METHOD__);
+        \Yii::info((string)json_encode($post), __METHOD__);
         return [""];
     }
 

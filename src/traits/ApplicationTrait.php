@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace respund\collector\traits;
 
+use respund\collector\exceptions\RespundException;
 use respund\collector\RespundConsoleApplication;
 use Psr\Log\LogLevel;
 use Yii;
@@ -19,25 +20,33 @@ trait ApplicationTrait
     public function info(string $message, array $context = []) : void
     {
         $this->log(LogLevel::INFO, $message, $context);
-        Yii::info(json_encode(['message' => $message, 'context' => $context], JSON_PRETTY_PRINT), $this->logCategory);
+        /** @var string $messageWithContext */
+        $messageWithContext = json_encode(['message' => $message, 'context' => $context], JSON_PRETTY_PRINT);
+        Yii::info($messageWithContext, $this->logCategory);
     }
 
     public function error(string $message, array $context = []) : void
     {
         $this->log(LogLevel::ERROR, $message, $context);
-        Yii::error(json_encode(['message' => $message, 'context' => $context], JSON_PRETTY_PRINT), $this->logCategory);
+        /** @var string $messageWithContext */
+        $messageWithContext = json_encode(['message' => $message, 'context' => $context], JSON_PRETTY_PRINT);
+        Yii::error($messageWithContext, $this->logCategory);
     }
 
     public function debug(string $message, array $context = []) : void
     {
         $this->log(LogLevel::DEBUG, $message, $context);
-        Yii::debug(json_encode(['message' => $message, 'context' => $context], JSON_PRETTY_PRINT), $this->logCategory);
+        /** @var string $messageWithContext */
+        $messageWithContext = json_encode(['message' => $message, 'context' => $context], JSON_PRETTY_PRINT);
+        Yii::debug($messageWithContext, $this->logCategory);
     }
 
     public function warning(string $message, array $context = []) : void
     {
         $this->log(LogLevel::WARNING, $message, $context);
-        Yii::warning(json_encode(['message' => $message, 'context' => $context], JSON_PRETTY_PRINT), $this->logCategory);
+        /** @var string $messageWithContext */
+        $messageWithContext = json_encode(['message' => $message, 'context' => $context], JSON_PRETTY_PRINT);
+        Yii::warning($messageWithContext, $this->logCategory);
     }
 
 

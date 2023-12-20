@@ -69,7 +69,7 @@ class ResponseFactory
     private function makeNew(Respondent $respondent) : Response
     {
 
-        $recordNr = ($respondent->survey->getResponses()->count()) +1;
+        $recordNr = intval($respondent->survey->getResponses()->count()) + 1;
         $params = [
             'survey_id' => $respondent->survey_id,
             'respondent_id' => $respondent->primaryKey,

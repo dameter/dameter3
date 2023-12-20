@@ -1,13 +1,12 @@
 <?php
 
-/** @var yii\web\View $this */
+/** @var \respund\collector\app\View $this */
 /** @var string $name */
 /** @var string $message */
 /** @var Exception $exception  */
 /** @var string $retryUrl */
 
 use respund\collector\Translate;
-var_dump($retryUrl);
 ?>
 <div class="jumbotron">
     <div class="alert alert-danger">
@@ -17,5 +16,5 @@ var_dump($retryUrl);
         <?= \yii\helpers\Html::a(Translate::t("Try again"), $retryUrl, ['class' => 'btn btn-primary'])?>
     </div>
 
-    <div><?= Yii::$app->request->getUserIP() ?></div>
+    <div><?= $this->request()->getUserIP() ?></div>
 </div>

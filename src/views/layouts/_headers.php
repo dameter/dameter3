@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 
-/** @var yii\web\View $this */
+/** @var \respund\collector\app\View $this */
 
 ?>
 
