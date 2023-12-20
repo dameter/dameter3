@@ -39,4 +39,18 @@ class Survey extends TimedActiveRecord
             ->indexBy('uuid');
     }
 
+    public function structureItem(string $name) :array
+    {
+        $data = json_decode($this->structure, true);
+
+        foreach ($data['pages'] as $page) {
+            foreach ($page['elements'] as $element) {
+                if($element['name'] == $name) {
+                    return $element;
+                }
+            }
+        }
+        return [];
+    }
+
 }

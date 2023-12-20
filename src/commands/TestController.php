@@ -36,6 +36,7 @@ class TestController extends Controller
         $survey->structure = $json;
 
 
+
         if(!$survey->save()) {
             $this->getApp()->error("error saving survey");
             print_r($survey->errors);

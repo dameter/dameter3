@@ -8,6 +8,10 @@ class AppAsset extends AssetBundle
 {
     public $sourcePath = __DIR__;
 
+    public $publishOptions = [
+        'forceCopy' => YII_ENV === 'dev',
+    ];
+
     public $css = [
         'css/style.css'
     ];

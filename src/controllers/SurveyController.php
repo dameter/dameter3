@@ -36,4 +36,9 @@ class SurveyController extends BaseController
         return $this->render('index', $this->viewParams);
     }
 
+    public function actionTest()
+    {
+        return $this->render('test', $this->viewParams);
+
+    }
 }

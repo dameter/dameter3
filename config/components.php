@@ -13,6 +13,7 @@ return [
         'rules' => [
             '/s/<key:[\w-]+>' => 'survey/index',
             '/go/<key:[\w-]+>' => 'survey/respondent',
+            '/edit/<key:[\w-]+>' => '/admin/survey/update',
         ],
     ],
     'user' => [

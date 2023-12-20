@@ -5,3 +5,11 @@
     width: 100%;
     max-width: 100%;
 }
+
+.admin-layout {
+    background-color: #eeeeee;
+}
+
+.test{
+    font-size: 3em !important;
+}
