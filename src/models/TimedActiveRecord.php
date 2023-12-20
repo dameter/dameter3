@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace respund\collector\models;
 use respund\collector\traits\ApplicationAwareTrait;
@@ -17,7 +18,10 @@ class TimedActiveRecord extends BaseActiverecord
 
     const TIME_COL_LENGTH = 32;
 
-    public function rules()
+    /**
+     * @return array<mixed>
+     */
+    public function rules() : array
     {
         return [
             [['time_created', 'time_updated', 'time_completed'], 'string', 'max' => self::TIME_COL_LENGTH],

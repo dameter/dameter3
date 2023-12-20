@@ -1,9 +1,9 @@
 <?php
+declare(strict_types=1);
+
 namespace respund\collector\commands;
 
 use respund\collector\factories\RespondentFactory;
-use respund\collector\models\Language;
-use respund\collector\models\Respondent;
 use respund\collector\models\Status;
 use respund\collector\models\Survey;
 use respund\collector\services\RespondentGenerationService;
@@ -16,7 +16,8 @@ class TestController extends Controller
 {
     use ApplicationAwareTrait;
 
-    public function actionCreateSurvey(string $surveyId) {
+    public function actionCreateSurvey(string $surveyId) : void
+    {
 
         // create survey entity from a json file
 
@@ -47,7 +48,8 @@ class TestController extends Controller
 
     }
 
-    public function actionCreateRespondent(string $surveyKey, string $key) {
+    public function actionCreateRespondent(string $surveyKey, string $key) : void
+    {
 
         $survey = (new Survey())->findByKey($surveyKey);
         $model = (new RespondentFactory())->makeBase($survey, $key);
@@ -62,7 +64,7 @@ class TestController extends Controller
         print_r($model->attributes);
     }
 
-    public function actionGenerate(string $surveyKey, int $amount = 1)
+    public function actionGenerate(string $surveyKey, int $amount = 1) : void
     {
         $survey = (new Survey())->findByKey($surveyKey);
         $service = new RespondentGenerationService($survey, $amount);

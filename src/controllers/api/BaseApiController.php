@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace respund\collector\controllers\api;
 
 
@@ -13,7 +15,10 @@ class BaseApiController extends Controller
 {
     use ApplicationAwareTrait;
 
-    public function behaviors()
+    /**
+     * @return array<string, mixed>
+     */
+    public function behaviors() : array
     {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
@@ -30,6 +35,9 @@ class BaseApiController extends Controller
         return $behaviors;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     protected function logContext() : array
     {
         return [

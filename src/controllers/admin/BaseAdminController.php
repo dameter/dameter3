@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace respund\collector\controllers\admin;
 
@@ -11,10 +12,11 @@ use yii\filters\AccessControl;
 class BaseAdminController extends BaseController
 {
     public $layout = "admin";
+
     /**
-     * {@inheritdoc}
+     * @return array<mixed>
      */
-    public function behaviors()
+    public function behaviors() : array
     {
         return [
             'access' => [

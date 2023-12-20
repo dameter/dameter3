@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace respund\collector\models;
 
@@ -18,7 +19,7 @@ class Response extends TimedActiveRecord
 {
     use UuidRecordTrait;
 
-    public function rules()
+    public function rules() : array
     {
         return array_merge(parent::rules(),[
             [['nr', 'respondent_id'], 'required'],
@@ -35,6 +36,9 @@ class Response extends TimedActiveRecord
         ]);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function dataDecoded() : array
     {
 
@@ -59,6 +63,9 @@ class Response extends TimedActiveRecord
         return 0;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function currentData() : array
     {
         $data = $this->dataDecoded();

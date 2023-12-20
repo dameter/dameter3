@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace respund\collector\models;
 
@@ -14,7 +15,10 @@ class Setting extends ActiveRecord
 {
     const KEY_LENGTH = "keyLength";
 
-    public function rules()
+    /**
+     * @return array<mixed>
+     */
+    public function rules() : array
     {
         return array_merge(parent::rules(),[
             [['name', 'value'], 'required'],

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace respund\collector\controllers\api;
 use respund\collector\factories\ResponseFactory;
@@ -10,20 +11,17 @@ class ResponseController extends BaseApiController
 {
     public $enableCsrfValidation = false;
 
-    public function beforeAction($action)
+    public function beforeAction($action) : bool
     {
         Yii::info("API action:".$this->id."/".$this->action->id, __METHOD__);
         return parent::beforeAction($action);
     }
 
-    public function actionIndex()
-    {
 
-        Yii::info("post data", __METHOD__);
-        return ["kjsdfbsdfjk"];
-    }
-
-    public function actionSave()
+    /**
+     * @return string[]
+     */
+    public function actionSave() : array
     {
         $request = \Yii::$app->request;
         if(!$request->getIsPost()) {
@@ -70,7 +68,10 @@ class ResponseController extends BaseApiController
     }
 
 
-    public function actionLanguageChange()
+    /**
+     * @return string[]
+     */
+    public function actionLanguageChange() : array
     {
         return [""];
     }

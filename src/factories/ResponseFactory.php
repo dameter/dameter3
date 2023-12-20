@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace respund\collector\factories;
 
 use respund\collector\models\Respondent;
@@ -14,6 +16,12 @@ class ResponseFactory
 {
     use ApplicationAwareTrait;
 
+    /**
+     * @param Respondent $respondent
+     * @param array<string, mixed> $data
+     * @return Response
+     * @throws RespundException
+     */
     public function make(Respondent $respondent, array $data) : Response
     {
 
@@ -26,6 +34,12 @@ class ResponseFactory
 
     }
 
+    /**
+     * @param Response $response
+     * @param array<string, mixed> $data
+     * @return Response
+     * @throws RespundException
+     */
     public function saveData(Response $response, array $data) : Response
     {
 

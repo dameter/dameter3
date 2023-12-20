@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 use yii\db\Expression;
 use yii\db\Migration;
@@ -30,7 +31,8 @@ class m231215_093435_init extends Migration
         $this->dropTable('survey');
     }
 
-    private function makeSurvey() {
+    private function makeSurvey() : void
+    {
         $this->createTable('survey', [
             'survey_id' => $this->primaryKey(),
             'status_id' => $this->integer()->notNull(),
@@ -72,7 +74,7 @@ class m231215_093435_init extends Migration
         ]);
 
         $this->addForeignKey('fk_respondent_survey', 'respondent', 'survey_id', 'survey', 'survey_id',
-            new Expression("CASCADE"), new Expression("CASCADE"));
+            (string) new Expression("CASCADE"), (string) new Expression("CASCADE"));
 
         $this->createIndex('ix_respondent_status', 'respondent', 'status_id');
         $this->createIndex('ix_respondent_language', 'respondent', 'language_id');
@@ -107,9 +109,9 @@ class m231215_093435_init extends Migration
         ]);
 
         $this->addForeignKey('fk_response_survey', 'response', 'survey_id', 'survey', 'survey_id',
-            new Expression("CASCADE"), new Expression("CASCADE"));
+            (string) new Expression("CASCADE"), (string) new Expression("CASCADE"));
         $this->addForeignKey('fk_response_respondent', 'response', 'respondent_id', 'respondent', 'respondent_id',
-            new Expression("CASCADE"), new Expression("CASCADE"));
+            (string) new Expression("CASCADE"), (string) new Expression("CASCADE"));
 
         $this->createIndex('ix_response_uuid', 'response', 'uuid', true);
         $this->createIndex('ix_response_status', 'response', 'status_id');

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace respund\collector\models;
 
@@ -18,7 +19,7 @@ class Survey extends TimedActiveRecord
     use UuidRecordTrait;
     use KeyRecordTrait;
 
-    public function rules()
+    public function rules(): array
     {
         return array_merge(parent::rules(),[
             [['structure'], 'string'],
@@ -39,18 +40,5 @@ class Survey extends TimedActiveRecord
             ->indexBy('uuid');
     }
 
-    public function structureItem(string $name) :array
-    {
-        $data = json_decode($this->structure, true);
-
-        foreach ($data['pages'] as $page) {
-            foreach ($page['elements'] as $element) {
-                if($element['name'] == $name) {
-                    return $element;
-                }
-            }
-        }
-        return [];
-    }
 
 }

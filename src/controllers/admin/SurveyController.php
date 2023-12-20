@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace respund\collector\controllers\admin;
 
@@ -11,11 +12,18 @@ use Yii;
 
 class SurveyController extends BaseAdminController
 {
-    public function actionIndex()
+    public function actionIndex() : string
     {
         return "works";
     }
-    public function actionUpdate()
+
+    /**
+     * @return array<mixed>|string
+     * @throws NotFoundHttpException
+     * @throws UserException
+     * @throws \respund\collector\exceptions\RespundException
+     */
+    public function actionUpdate() : array|string
     {
 
         $surveyKey = $this->request()->get('key');

@@ -9,7 +9,8 @@ use yii\web\NotFoundHttpException;
 
 class SurveyController extends BaseController
 {
-    public function actionIndex() {
+    public function actionIndex() : string
+    {
         $request = $this->request();
         $key = $request->get('key');
         $model = (new Survey())->findByKey($key);
@@ -17,7 +18,7 @@ class SurveyController extends BaseController
         return $this->render('index', $this->viewParams);
     }
 
-    public function actionRespondent()
+    public function actionRespondent() : string
     {
         $request = $this->request();
         $respondentKey = $request->get('key');
@@ -36,7 +37,7 @@ class SurveyController extends BaseController
         return $this->render('index', $this->viewParams);
     }
 
-    public function actionTest()
+    public function actionTest() : string
     {
         return $this->render('test', $this->viewParams);
 

@@ -1,9 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace respund\collector\traits;
 
 use respund\collector\RespundConsoleApplication;
-use respund\collector\models\User;
 use Psr\Log\LogLevel;
 use Yii;
 
@@ -13,7 +13,6 @@ use Yii;
  */
 trait ApplicationTrait
 {
-    public ?User $identity = null;
     private string $logCategory = "respund\collector";
 
 

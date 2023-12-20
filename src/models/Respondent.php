@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace respund\collector\models;
 use respund\collector\traits\KeyRecordTrait;
@@ -21,7 +22,7 @@ class Respondent extends TimedActiveRecord
     use UuidRecordTrait;
     use KeyRecordTrait;
 
-    public function rules()
+    public function rules() : array
     {
         return array_merge(parent::rules(),[
             [['survey_id', 'status_id', 'uuid', 'language_id', 'key'], 'required'],
