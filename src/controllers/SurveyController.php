@@ -2,6 +2,7 @@
 
 namespace respund\collector\controllers;
 
+use respund\collector\exceptions\RespundException;
 use respund\collector\factories\ResponseFactory;
 use respund\collector\models\Respondent;
 use respund\collector\models\Survey;
@@ -13,7 +14,7 @@ class SurveyController extends BaseController
     {
         $request = $this->request();
         $key = $request->get('key');
-        $model = (new Survey())->findByKey($key);
+        $model = $this->findSurvey($key);
         $this->viewParams['model'] = $model;
         return $this->render('index', $this->viewParams);
     }
@@ -22,10 +23,8 @@ class SurveyController extends BaseController
     {
         $request = $this->request();
         $respondentKey = $request->get('key');
-        $respondent = (new Respondent())->findByKey($respondentKey);
-        if(!($respondent instanceof Respondent)) {
-            throw new NotFoundHttpException();
-        }
+        $respondent = $this->findRespondent($respondentKey);
+
         $survey = $respondent->survey;
         $this->viewParams['survey'] = $survey;
         $this->viewParams['respondent'] = $respondent;
@@ -42,4 +41,6 @@ class SurveyController extends BaseController
         return $this->render('test', $this->viewParams);
 
     }
+
+
 }

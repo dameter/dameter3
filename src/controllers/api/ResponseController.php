@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace respund\collector\controllers\api;
 use respund\collector\exceptions\RespundException;
 use respund\collector\factories\ResponseFactory;
-use respund\collector\models\Respondent;
 use respund\collector\models\Response;
 use Yii;
 
@@ -33,7 +32,7 @@ class ResponseController extends BaseApiController
             return ["no-data"];
         }
         $post = $request->post();
-        if(!isset($post['data']) or empty($post['data'])) {
+        if(!is_array($post) or !isset($post['data']) or empty($post['data'])) {
             $this->getApp()->warning("no-data");
             return ["error"];
         }

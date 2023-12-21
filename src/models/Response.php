@@ -37,11 +37,12 @@ class Response extends TimedActiveRecord
     }
 
     /**
-     * @return array<string,mixed>
+     * @return array<string,array|mixed>
      */
     public function dataDecoded() : array
     {
 
+        /** @var array<string,array|mixed> $data */
         $data = Json::decode($this->data);
         if(empty($data)) {
             $data = [];
@@ -58,7 +59,10 @@ class Response extends TimedActiveRecord
     {
         $data = $this->dataDecoded();
         if(isset($data[ResponseData::COL_PAGE_NR])) {
-            return intval($data[ResponseData::COL_PAGE_NR]);
+
+            /** @var string|int $rawValue */
+            $rawValue = $data[ResponseData::COL_PAGE_NR];
+            return intval($rawValue);
         }
         return 0;
     }
@@ -70,7 +74,9 @@ class Response extends TimedActiveRecord
     {
         $data = $this->dataDecoded();
         if(isset($data[ResponseData::ATTRIBUTES])) {
-            return $data[ResponseData::ATTRIBUTES];
+            /** @var array<string, mixed> $out */
+            $out = $data[ResponseData::ATTRIBUTES];
+            return $out;
         }
         return [];
     }

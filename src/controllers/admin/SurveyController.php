@@ -27,17 +27,19 @@ class SurveyController extends BaseAdminController
     {
 
         $surveyKey = $this->request()->get('key');
-        if(empty($surveyKey)) {
+        if(empty($surveyKey) or (!is_string($surveyKey) and !is_numeric($surveyKey))) {
             throw new UserException("Invalid link");
         }
-        $survey = (new Survey())->findByKey($surveyKey);
-        if(!($survey instanceof $survey)) {
-            throw new NotFoundHttpException();
-        }
+
+
+        $survey = $this->findSurvey($surveyKey);
 
         if($this->request()->isAjax) {
             $this->response()->format = Response::FORMAT_JSON;
             $post = $this->request()->post();
+            if(!is_array($post)){
+                return ["errors" => "invalid-post"];
+            }
             if($survey->load($post) && $survey->save()) {
                 return ["saved"];
             } else {
@@ -48,7 +50,11 @@ class SurveyController extends BaseAdminController
         }
 
         if($this->request()->isPost) {
-            if($survey->load($this->request()->post())) {
+            $post = $this->request()->post();
+            if(!is_array($post)){
+                return ["errors" => "invalid-post"];
+            }
+            if($survey->load($post)) {
                 if ($survey->save()) {
                     // saved
 

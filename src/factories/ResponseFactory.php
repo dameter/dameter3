@@ -42,18 +42,35 @@ class ResponseFactory
      */
     public function saveData(Response $response, array $data) : Response
     {
-
         $currentData = $response->dataDecoded();
-        $currentData[ResponseData::COL_PAGE_NR] = intval($data[ResponseData::COL_PAGE_NR]);
-        foreach ($data['pageData'] as $key => $value) {
-            if(is_numeric($value)) {
-                // convert to numeric
-                $value = $value +0;
+        if(!empty($data)) {
+            $this->getApp()->debug("got-response-data", []);
+
+            /** @var array<string|int,string|int|float>  $attributes */
+            $attributes = $currentData[ResponseData::ATTRIBUTES];
+
+            $currentData[ResponseData::COL_PAGE_NR] = intval($data[ResponseData::COL_PAGE_NR]);
+            /** @var array<string, string|int|float> $pageData */
+            $pageData = $data['pageData'];
+
+            foreach ($pageData as $key => $value) {
+                $this->getApp()->debug("saving item $key");
+                if(is_numeric($value)) {
+                    // convert to numeric
+                    $value = $value +0;
+                }
+                $attributes[$key] = $value;
             }
-            $currentData[ResponseData::ATTRIBUTES ][$key] = $value;
+            $currentData[ResponseData::ATTRIBUTES] = $attributes;
+
+        } else {
+            $this->getApp()->debug("got-empty-response");
         }
+
         $response->data = Json::encode($currentData);
+
         if($response->save()) {
+            $this->getApp()->info("saved-response-data", $currentData);
             return $response;
         }
         throw new RespundException("Error saving response: ". json_encode($response->errors));
