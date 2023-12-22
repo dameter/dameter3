@@ -15,7 +15,7 @@ class SurveySearch extends Survey implements SearchInterface
     public function rules() : array
     {
         return [
-            [['name', 'key', 'uuid'], 'safe'],
+            [['name', 'key', 'uuid', 'status_id'], 'safe'],
         ];
     }
 
@@ -44,6 +44,8 @@ class SurveySearch extends Survey implements SearchInterface
 
         $this->load($params);
         $query
+            ->andFilterWhere(['status_id'=> $this->status_id])
+
             ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'key', $this->key])
             ->andFilterWhere(['like', 'uuid', $this->key])

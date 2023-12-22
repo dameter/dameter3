@@ -5,6 +5,7 @@ namespace respund\collector\models;
 
 use respund\collector\traits\KeyRecordTrait;
 use respund\collector\traits\UuidRecordTrait;
+use respund\collector\traits\WithStatusRecordTrait;
 use yii\db\ActiveQuery;
 
 /**
@@ -18,6 +19,7 @@ class Survey extends TimedActiveRecord implements KeyedModelInterface, UuidModel
 {
     use UuidRecordTrait;
     use KeyRecordTrait;
+    use WithStatusRecordTrait;
 
     public static function tableName() : string
     {
@@ -27,9 +29,12 @@ class Survey extends TimedActiveRecord implements KeyedModelInterface, UuidModel
     public function rules(): array
     {
         return array_merge(parent::rules(),[
+            [['status_id', 'uuid','key'], 'required'],
             [['structure'], 'string'],
             [['key', 'uuid'], 'string', 'max' => 45],
             [['name'], 'string', 'max' => 255],
+            [['status_id'], 'integer'],
+
         ]);
     }
 

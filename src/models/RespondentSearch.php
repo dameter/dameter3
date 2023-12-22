@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 class RespondentSearch extends Respondent implements SearchInterface
 {
     public bool $isSearchModel = true;
+    public ?string $survey_status_id = null;
 
     /**
      * @return array<int, mixed>
@@ -15,7 +16,8 @@ class RespondentSearch extends Respondent implements SearchInterface
     public function rules() : array
     {
         return [
-            [['language_id', 'key', 'uuid'], 'safe'],
+            [['language_id', 'key', 'uuid', 'survey_id', 'status_id'], 'safe'],
+            [['survey_status_id'], 'safe'],
         ];
     }
 
@@ -35,7 +37,7 @@ class RespondentSearch extends Respondent implements SearchInterface
      */
     public function search(array $params) : ActiveDataProvider
     {
-        $query = Respondent::find();
+        $query = Respondent::find()->joinWith('survey');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -44,10 +46,14 @@ class RespondentSearch extends Respondent implements SearchInterface
 
         $this->load($params);
         $query
-            ->andFilterWhere(['language_id'=> $this->language_id])
+            ->andFilterWhere(['respondent.language_id'=> $this->language_id])
+            ->andFilterWhere(['respondent.survey_id'=> $this->survey_id])
+            ->andFilterWhere(['respondent.status_id'=> $this->status_id])
 
-            ->andFilterWhere(['like', 'key', $this->key])
-            ->andFilterWhere(['like', 'uuid', $this->key])
+            ->andFilterWhere(['like', 'respondent.key', $this->key])
+            ->andFilterWhere(['like', 'respondent.uuid', $this->key])
+
+            ->andFilterWhere(['like', 'survey.status_id', $this->survey_status_id])
         ;
 
         return $dataProvider;

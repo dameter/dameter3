@@ -16,16 +16,17 @@ use respund\collector\models\Survey;
     'columns' => [
 
         'key',
+        'status_id',
         'name',
         'uuid',
         'time_created:datetime',
 
         [
-            'class' => 'yii\grid\ActionColumn',
-            'template' => "{view} {update}",
+            'class' => \yii\grid\ActionColumn::class,
+            'template' => "{view} {update} {open}",
             'urlCreator' => function ($action, Survey $model, $key, $index) {
                 return \yii\helpers\Url::to(["//admin/survey/$action", "key" => $model->key]);
-            }
+            },
         ],
     ],
 ]); ?>

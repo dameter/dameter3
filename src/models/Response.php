@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace respund\collector\models;
 
 use respund\collector\traits\UuidRecordTrait;
+use respund\collector\traits\WithStatusRecordTrait;
 use yii\db\ActiveQuery;
 use yii\helpers\Json;
 
@@ -18,6 +19,8 @@ use yii\helpers\Json;
 class Response extends TimedActiveRecord implements UuidModelInterface
 {
     use UuidRecordTrait;
+    use WithStatusRecordTrait;
+
 
     public function rules() : array
     {

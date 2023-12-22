@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace respund\collector\models;
 use respund\collector\traits\KeyRecordTrait;
 use respund\collector\traits\UuidRecordTrait;
+use respund\collector\traits\WithStatusRecordTrait;
 use yii\db\ActiveQuery;
 
 /**
@@ -21,6 +22,7 @@ class Respondent extends TimedActiveRecord implements KeyedModelInterface, UuidM
 {
     use UuidRecordTrait;
     use KeyRecordTrait;
+    use WithStatusRecordTrait;
 
     public static function tableName() : string
     {
@@ -34,8 +36,7 @@ class Respondent extends TimedActiveRecord implements KeyedModelInterface, UuidM
             [['uuid','key'], 'string', 'max' => 45],
             [['uuid'], 'unique'],
             [['params'], 'string'],
-            [['language_id'], 'integer'],
-            [['survey_id'], 'integer'],
+            [['language_id', 'status_id', 'survey_id'], 'integer'],
         ]);
     }
 
