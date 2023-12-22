@@ -15,7 +15,7 @@ use yii\helpers\Json;
  * @property string $data response data in json
  * @property Respondent $respondent
  */
-class Response extends TimedActiveRecord
+class Response extends TimedActiveRecord implements UuidModelInterface
 {
     use UuidRecordTrait;
 

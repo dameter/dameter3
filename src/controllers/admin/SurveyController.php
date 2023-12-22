@@ -4,18 +4,17 @@ declare(strict_types=1);
 namespace respund\collector\controllers\admin;
 
 use respund\collector\models\Survey;
-use respund\collector\Translate;
+use respund\collector\models\SurveySearch;
 use yii\base\UserException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use Yii;
 
-class SurveyController extends BaseAdminController
+class SurveyController extends BaseAdminModelController
 {
-    public function actionIndex() : string
-    {
-        return "works";
-    }
+
+    protected $modelClass = Survey::class;
+    protected $searchModelClass = SurveySearch::class;
 
     /**
      * @return array<mixed>|string

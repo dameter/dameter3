@@ -79,7 +79,7 @@ JS
     , $this::POS_READY);
 
 ?>
-<select name="cars" id="languageChanger">
+<select id="languageChanger">
     <option value="et">Eesti</option>
     <option value="ru">Vene</option>
     <option value="en-US">English</option>

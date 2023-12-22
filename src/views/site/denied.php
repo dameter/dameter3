@@ -6,7 +6,7 @@
 /** @var Exception $exception  */
 /** @var string $retryUrl */
 
-use respund\collector\Translate;
+use respund\collector\app\Translate;
 ?>
 <div class="jumbotron">
     <div class="alert alert-danger">

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace respund\collector\controllers\admin;
 
 use respund\collector\controllers\BaseController;
-use respund\collector\Translate;
+use respund\collector\app\Translate;
 use Yii;
 use yii\base\UserException;
 use yii\filters\AccessControl;

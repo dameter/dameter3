@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace respund\collector\traits;
 
-use respund\collector\RespundConsoleApplication;
-use respund\collector\RespundWebApplication;
+use respund\collector\app\RespundConsoleApplication;
+use respund\collector\app\RespundWebApplication;
 use respund\collector\exceptions\RespundException;
 use Yii;
 

@@ -17,10 +17,15 @@ use yii\db\ActiveQuery;
  * @property Survey $survey
  * @property ?Response $response
  */
-class Respondent extends TimedActiveRecord
+class Respondent extends TimedActiveRecord implements KeyedModelInterface, UuidModelInterface
 {
     use UuidRecordTrait;
     use KeyRecordTrait;
+
+    public static function tableName() : string
+    {
+        return 'respondent';
+    }
 
     public function rules() : array
     {

@@ -13,7 +13,7 @@ $config = [
     'controllerNamespace' => "respund\collector\controllers",
     'defaultRoute'=>'survey/index',
     'language' =>'et',
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', \respund\collector\app\AppBootstrap::class],
 
     'components' => $components,
     'params' => $params

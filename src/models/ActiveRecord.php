@@ -11,6 +11,7 @@ use yii\db\ActiveRecord as BaseActiverecord;
  */
 class ActiveRecord extends BaseActiverecord
 {
+    public bool $isSearchModel = false;
     use ApplicationAwareTrait;
 
 }

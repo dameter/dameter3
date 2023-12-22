@@ -7,7 +7,7 @@
 use respund\collector\models\Survey;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use respund\collector\Translate;
+use respund\collector\app\Translate;
 
 $bundle = \respund\collector\assets\MonacoEditorAsset::register($this);
 $code = $survey->structure;

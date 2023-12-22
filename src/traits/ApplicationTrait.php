@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace respund\collector\traits;
 
-use respund\collector\exceptions\RespundException;
-use respund\collector\RespundConsoleApplication;
+use respund\collector\app\RespundConsoleApplication;
 use Psr\Log\LogLevel;
 use Yii;
 
@@ -14,7 +13,7 @@ use Yii;
  */
 trait ApplicationTrait
 {
-    private string $logCategory = "respund\collector";
+    private string $logCategory = "respund\collector\app";
 
 
     public function info(string $message, array $context = []) : void

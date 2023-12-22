@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace respund\collector\models;
 use respund\collector\traits\ApplicationAwareTrait;
-use yii\db\ActiveRecord as BaseActiverecord;
 
 
 /**
@@ -12,7 +11,7 @@ use yii\db\ActiveRecord as BaseActiverecord;
  * @property string $time_completed
  * @property int $status_id
  */
-class TimedActiveRecord extends BaseActiverecord
+class TimedActiveRecord extends ActiveRecord
 {
     use ApplicationAwareTrait;
 

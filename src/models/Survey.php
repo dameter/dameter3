@@ -14,10 +14,15 @@ use yii\db\ActiveQuery;
  * @property ?string $external_id
  * @property string $structure json surveyjs object
  */
-class Survey extends TimedActiveRecord
+class Survey extends TimedActiveRecord implements KeyedModelInterface, UuidModelInterface
 {
     use UuidRecordTrait;
     use KeyRecordTrait;
+
+    public static function tableName() : string
+    {
+        return 'survey';
+    }
 
     public function rules(): array
     {

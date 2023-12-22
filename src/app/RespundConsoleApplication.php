@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace respund\collector;
+namespace respund\collector\app;
 
 use respund\collector\traits\ApplicationTrait;
 use yii\console\Application;

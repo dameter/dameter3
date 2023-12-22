@@ -12,7 +12,7 @@ $config = [
     'runtimePath' => dirname(__DIR__) . '/runtime',
     'controllerNamespace' => "respund\collector\commands",
     'language' =>'et',
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', \respund\collector\app\AppBootstrap::class],
 
     'components' => $components,
     'params' => $params
