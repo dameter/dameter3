@@ -7,6 +7,7 @@ use respund\collector\traits\KeyRecordTrait;
 use respund\collector\traits\UuidRecordTrait;
 use respund\collector\traits\WithStatusRecordTrait;
 use yii\db\ActiveQuery;
+use yii\helpers\Json;
 
 /**
  * @property string $key

@@ -1,0 +1,19 @@
+{
+  "name": "respund-collector-server",
+  "compilerOptions": {
+    "outDir": "./nodeserver/built",
+
+     "target": "es2016",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "module": "commonjs",                                /* Specify what module code is generated. */
+
+    "rootDir": "./nodeserver",
+    "rootDirs": ["./nodeserver/modules"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  }
+}

@@ -11,7 +11,8 @@
         "yiisoft/yii2": "~2.0.45",
         "yiisoft/yii2-bootstrap5": "~2.0.2",
         "yiisoft/yii2-symfonymailer": "~2.0.3",
-        "ramsey/uuid": "^4.7"
+        "ramsey/uuid": "^4.7",
+        "guzzlehttp/guzzle": "*"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",

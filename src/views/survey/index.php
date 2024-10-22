@@ -39,7 +39,7 @@ $this->registerJs(<<<JS
         options.html = str;
     });
 
-    
+  
     
     survey.onAfterRenderSurvey.add(function (survey) {
         let languageChanger = document.getElementById('languageChanger');
@@ -56,6 +56,13 @@ $this->registerJs(<<<JS
     });
 
     survey.onValueChanged.add(function (survey, options) {
+
+        let runner = survey.createExpressionRunner("({source} = 1)");
+        let result = runner.run(survey.data);
+        console.log("runner");
+        console.log(runner);
+        console.log(result);
+
         let variableName = options.name;
         let variableValue = options.value;
         let pageData = {[variableName]: variableValue};
@@ -64,7 +71,6 @@ $this->registerJs(<<<JS
             pageData: pageData,
             responseId: '$responseId',
         };
-        
         document
         .textContent = JSON.stringify(pageData);
         saveData('$url', postData)

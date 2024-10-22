@@ -5,6 +5,8 @@
 
 use respund\collector\assets\AppAsset;
 use yii\bootstrap5\Html;
+use yii\bootstrap5\Nav;
+use yii\bootstrap5\NavBar;
 
 AppAsset::register($this);
 
@@ -24,6 +26,25 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     </head>
     <body class="admin-layout d-flex flex-column h-100">
     <?php $this->beginBody() ?>
+
+    <header id="header">
+        <?php
+        NavBar::begin([
+            'brandLabel' => Yii::$app->name,
+            'brandUrl' => Yii::$app->homeUrl,
+            'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
+        ]);
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav'],
+            'items' => [
+                ['label' => 'Surveys', 'url' => ['//admin/survey/index']],
+                ['label' => 'Respondents', 'url' => ['//admin/respondent/index']],
+            ]
+        ]);
+        NavBar::end();
+        ?>
+    </header>
+
     <main id="main" class="flex-shrink-0" role="main">
         <div class="container">
             <?= $content ?>

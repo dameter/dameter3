@@ -51,3 +51,5 @@ RUN pecl install xdebug-3.2.0 mailparse
 RUN docker-php-ext-enable xdebug mailparse
 RUN apk del -f .build-deps
 RUN apk add jq
+
+RUN apk add --no-cache --update nodejs npm

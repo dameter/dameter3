@@ -33,7 +33,6 @@ class BaseApiController extends Controller
             'class' => ContentNegotiator::class,
             'formats' => [
                 'application/json' => Response::FORMAT_JSON,
-                //'application/xml' => Response::FORMAT_XML,
             ],
         ];
 

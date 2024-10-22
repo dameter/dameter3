@@ -5,8 +5,10 @@ namespace respund\collector\commands;
 
 use respund\collector\exceptions\RespundException;
 use respund\collector\factories\RespondentFactory;
+use respund\collector\models\Response;
 use respund\collector\models\Status;
 use respund\collector\models\Survey;
+use respund\collector\services\NodeRequestService;
 use respund\collector\services\RespondentGenerationService;
 use respund\collector\traits\ApplicationAwareTrait;
 use Ramsey\Uuid\Uuid;
@@ -29,7 +31,12 @@ class TestController extends Controller
             echo "invalid file ";
             return;
         }
-        $survey = $this->findSurvey($surveyId);
+
+        try {
+          $survey = $this->findSurvey($surveyId);
+        } catch (RespundException $e) {
+          $survey = null;
+        }
 
         if($survey == null ) {
             $survey = new Survey([
@@ -67,6 +74,15 @@ class TestController extends Controller
         }
         $this->getApp()->info("saved model");
         print_r($model->attributes);
+    }
+
+    public function actionNode() : void
+    {
+       $uuid = "3bcddf34-6f5a-46b6-9f8f-862e4dfa866e";
+       $response = (new Response())->findByUuid($uuid);
+
+        $service = new NodeRequestService();
+        $service->checkResponse($response);
     }
 
     public function actionGenerate(string $surveyKey, int $amount = 1) : void

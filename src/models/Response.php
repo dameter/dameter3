@@ -21,7 +21,6 @@ class Response extends TimedActiveRecord implements UuidModelInterface
     use UuidRecordTrait;
     use WithStatusRecordTrait;
 
-
     public function rules() : array
     {
         return array_merge(parent::rules(),[
@@ -33,7 +32,7 @@ class Response extends TimedActiveRecord implements UuidModelInterface
             [['survey_id'], 'integer'],
             [['respondent_id'], 'integer'],
 
-            [['data'], 'string'],
+            [['data'], 'safe'],
             [['time_completed'], 'string', 'max' => self::TIME_COL_LENGTH],
 
         ]);

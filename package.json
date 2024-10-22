@@ -1,13 +1,21 @@
 {
-  "name": "respund-collector",
+  "name": "respund-collector-server",
   "version": "1.0.0",
   "description": "Respund collector",
-  "main": "index.js",
+  "main": "nodeserver/built/index.js",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node nodeserver/built/index.js",
+    "test": "echo \"Error: no test specified\"",
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "compile": "tsc",
+    "fix": "gts fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -16,8 +24,19 @@
   "author": "Tõnis Ormisson <tonis@andmemasin.eu>",
   "dependencies": {
     "@collecthor/file-browser": "^1.5.5",
+    "dotenv": "^16.3.1",
     "monaco-editor": "^0.45.0",
+    "reflect-metadata": "^0.2.1",
     "showdown": "^2.1.0",
+    "survey-core": "^1.9.122",
     "survey-jquery": "^1.9.19"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.5",
+    "express": "^4.18.2",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
   }
 }

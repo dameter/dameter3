@@ -14,6 +14,10 @@ $code = $survey->structure;
 $code = str_replace('\\"', '\\\\"', $code);
 $saveUrl = \yii\helpers\Url::toRoute(["//admin/survey/update", 'key' => $survey->key]);
 
+$counterService = new \respund\collector\services\ResponseCounterService($survey);
+$counterService->run();
+echo $counterService->getCount();
+
 $bundlePath = $bundle->baseUrl;
 $this->registerJs(<<<JS
     require.config({ paths: { vs: '$bundlePath/vs' } });
