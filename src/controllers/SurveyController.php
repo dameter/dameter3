@@ -15,7 +15,7 @@ class SurveyController extends BaseController
         $request = $this->request();
         $key = $request->get('key');
         $model = $this->findSurvey($key);
-        $this->viewParams['model'] = $model;
+        $this->viewParams['survey'] = $model;
         return $this->render('index', $this->viewParams);
     }
 
